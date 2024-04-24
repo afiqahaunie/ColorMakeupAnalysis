@@ -17,3 +17,6 @@ def makeup():
 @app.route('/')
 def community():
     return render_template("community_page.html")
+
+if __name__ == '__main__' :
+    app.run(debug=True)
