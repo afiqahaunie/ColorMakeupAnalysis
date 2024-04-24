@@ -6,14 +6,14 @@ app = Flask(__name__)
 def home():
     return render_template("main_page.html")
 
-@app.route('/')
+@app.route('/color')
 def color():
     return render_template("color_page.html")
 
-@app.route('/')
+@app.route('/makeup')
 def makeup():
     return render_template("makeup_page.html")
 
-@app.route('/')
+@app.route('/community')
 def community():
     return render_template("community_page.html")
