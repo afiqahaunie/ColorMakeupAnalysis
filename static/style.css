@@ -3,16 +3,6 @@
     padding: 0;
 }
 
-.segment{
-    min-height: 100vh;
-    margin: 0;
-    padding: 0; 
-    background-image: url(background.jpg); 
-    background-position: center;
-    background-size: cover;
-    position: relative;
-}
-
 nav{
     display: flex;
     padding: 2% 6%;
@@ -59,6 +49,95 @@ nav .fa{
     display: none;
 }
 
+hr.dashed {
+    border-top: 3px dashed #0e0e0e;
+  }
+
+.segment{
+    min-height: 100vh;
+    margin: 0;
+    padding: 0; 
+    background-image: url(background.jpg); 
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+
+h1{
+   font-size: 30px;
+   font-weight: 550; 
+   text-align: center;
+   margin: 10px 0;
+   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+   color:rgb(190, 57, 115);
+   letter-spacing: 2px;
+}
+
+h2{
+    color: rgb(9, 9, 9);
+    font-size: 23px;
+    font-weight: 300;
+    font-family: sans-serif;
+    text-align: center;
+    line-height: 20px;
+    padding: 10px;
+
+}
+
+p{
+    color: rgb(6, 6, 6);
+    font-size: 15px;
+    font-weight: 300;
+    font-family:'Arial';
+    line-height: 20px;
+    padding: 10px;
+}
+
+.row{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.try-button{
+    display:inline-block;
+    text-decoration: none;
+    color: rgb(6, 6, 6);
+    border: 2px solid #d70675;
+    padding: 12px 34px;
+    font-size: 13px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    border-radius: 20%;
+}
+
+.try-button:hover{
+    border: 2px solid #d70675;
+    background: #d70675;
+    transition: 0.3s;
+}
+.segment-desc{
+    flex-basis: 31%;
+    background: rgb(199, 223, 241);
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+.segment-desc:hover{
+    box-shadow: 0 0 20px 0px rgba(0,0,0,2);
+}
 
 @media(max-width: 700px){
     .nav-links ul li{
