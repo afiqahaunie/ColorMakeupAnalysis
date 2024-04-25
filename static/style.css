@@ -49,8 +49,8 @@ nav .fa{
     display: none;
 }
 
-hr.dashed {
-    border-top: 3px dashed #0e0e0e;
+hr.solid {
+    border-top: 3px solid #0e0e0e;
   }
 
 .segment{
