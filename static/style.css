@@ -67,6 +67,20 @@ hr.solid {
     padding-top: 100px;
 }
 
+.bottom{
+    min-height: 100vh;
+    margin: 0;
+    padding: 0; 
+    background-image: url(color.jpg); 
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+
 h1{
    font-size: 30px;
    font-weight: 550; 
