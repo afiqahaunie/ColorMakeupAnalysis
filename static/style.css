@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+.header{
+    background:lightblue;
+}
+
 nav{
     display: flex;
     padding: 2% 6%;
