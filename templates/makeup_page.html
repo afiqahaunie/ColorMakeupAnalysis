@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>Makeup Test</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+</head>
+
+<body>
+    <section class="header">
+        <nav>
+            <div class="nav-links" id="navlinks">
+              <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="color">COLOR</a></li>
+                    <li><a href="makeup">MAKEUP</a></li>
+                    <li><a href="community">COMMUNITY</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <hr class="solid">
+    </section>
+
+    <section class="test-segment">
+        <div class="test-question-container">
+            <h2 class="question">How your eyes looks like?</h2>
+                <button class="answer-btn" id="answer-A">A. Less prominent eyes</button>
+                <button class="answer-btn" id="answer-B">B. More prominent eyes</button>
+        </div>
+        <div class="test-question-container">
+            <h2 class="question">How your nose looks like?</h2>
+                <button class="answer-btn" id="answer-A">A. Less prominent nose</button>
+                <button class="answer-btn" id="answer-B">B. More prominent nose</button>
+        </div>
+        <div class="test-question-container">
+            <h2 class="question">How your facial bone looks like?</h2>
+                <button class="answer-btn" id="answer-A">A. Less angular bone structure</button>
+                <button class="answer-btn" id="answer-B">B. More angular bone structure</button>
+        </div>
+        <div class="test-question-container"></div>
+            <h2 class="question">How your features looks like?</h2>
+                <button class="answer-btn" id="answer-A">A. Wider apart</button>
+                <button class="answer-btn" id="answer-B">B. Closer together</button>
+        </div>
+    </section>
+
+    <script>
+        var navlinks = document.getElementById("navlinks");
+        function showMenu() {
+            navlinks.style.right = "0";
+        }
+        function hideMenu() {
+            navlinks.style.right = "-200px";
+        }
+    </script>
+</body>
+
+</html>
