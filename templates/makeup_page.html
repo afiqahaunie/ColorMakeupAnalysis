@@ -28,7 +28,27 @@
 
     <section class="test-segment">
         <div class="test-question-container">
-            <h2>1. How your eyes look like?</h2>
+            <form action="/result" method="post">
+                <label for="eyes">How your eyes look like?</label>
+                <select name="eyes" id="eyes">
+                    <option value="A">A. Smaller eyes</option>
+                    <option value="B">B. Bigger eyes</option>
+                </select>
+                <label for="nose">How your nose look like?</label>
+                <select name="nose" id="nose">
+                    <option value="A">A. Less prominent eyes</option>
+                    <option value="B">B. More prominent eyes</option>
+                </select>
+                <label for="bone">How your facial bone look like?</label>
+                <select name="bone" id="bone">
+                    <option value="A">A. Less angular bone structur</option>
+                    <option value="B">B. More angular bone structur</option>
+                </select>
+                <label for="features">How your features look like?</label>
+                <select name="features" id="features">
+                    <option value="A">A. Wider apart</option>
+                    <option value="B">B. Closer together</option>
+                </select>
         </div>
     </section>
 
