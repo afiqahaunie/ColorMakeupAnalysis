@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -13,6 +13,10 @@ def color():
 @app.route('/makeup')
 def makeup():
     return render_template("makeup_page.html")
+
+@app.route('/test_result', methods=['POST'])
+def test_result():
+    return render_template('test_result.html')
 
 @app.route('/community')
 def community():
