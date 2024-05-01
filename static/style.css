@@ -217,9 +217,19 @@ h2.question{
     padding: 10px;
 }
 
+.image-answer-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.image-answer{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 10px;
+}
+
 .answer{
-    display: inline;
-    position: relative;
     font-family: sans-serif;
     font-weight: 150;
     padding: 10px;
@@ -279,12 +289,16 @@ input[type="radio"]:checked + .radio-indicator{
     .nav-links ul{
         padding: 25px;
     }
+}
 
-    .row{
+  .row{
         flex-direction: column;
     }
 
-}
+  .test-question-container.image-answer{
+        width: 100%;
+        height: auto;
+    }
 
 .button-container {
     display: flex;
