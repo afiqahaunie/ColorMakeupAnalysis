@@ -7,6 +7,26 @@
     <title>Makeup Test</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+    <script>
+        function validateForm() {
+            var questions = document.querySelectorAll('.test-question-container');
+            for (var i = 0; i < questions.length; i++) {
+                var radios = questions[i].querySelectorAll('input[type="radio"]');
+                var checked = false;
+                for (var j = 0; j < radios.length; j++) {
+                    if (radios[j].checked) {
+                        checked = true;
+                        break;
+                    }
+                }
+                if (!checked) {
+                    alert("Please answer all questions before submitting.");
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -27,27 +47,29 @@
     </section>
 
     <section class="test-segment">
-        <div class="test-question-container">
-            <h2 class="question">How your eyes looks like?</h2>
-                <button class="answer-btn" id="answer-A">A. Less prominent eyes</button>
-                <button class="answer-btn" id="answer-B">B. More prominent eyes</button>
-        </div>
-        <div class="test-question-container">
-            <h2 class="question">How your nose looks like?</h2>
-            <button class="answer-btn" id="answer-A">A. Less prominent nose</button>
-            <button class="answer-btn" id="answer-B">B. More prominent nose</button>
-        </div>
-        <div class="test-question-container">
-            <h2 class="question">How your facial bone looks like?</h2>
-            <button class="answer-btn" id="answer-A">A. Less angular bone structure</button>
-            <button class="answer-btn" id="answer-B">B. More angular bone structure</button>
-        </div>
-        <div class="test-question-container">
-            <h2 class="question">How your features looks like?</h2>
-            <button class="answer-btn" id="answer-A">A. Wider apart</button>
-            <button class="answer-btn" id="answer-B">B. Closer together</button>
-        </div>
-        <button class="submit">Submit</button>
+        <form action="{{ url_for('test_result') }}" method="post" onsubmit="return validateForm()">
+            <div class="test-question-container">
+                <h2 class="question">How your eyes look like?</h2>
+                <label class="answer"><input type="radio" name="eyes" value="A" class="answer-A">A. Smaller eyes</label>
+                <label class="answer"><input type="radio" name="eyes" value="B" class="answer-B">B. Bigger eyes</label>
+            </div>
+            <div class="test-question-container">
+                <h2 class="question">How your nose look like?</h2>
+                <label class="answer"><input type="radio" name="nose" value="A" class="answer-A">A. Less prominent eyes</label>
+                <label class="answer"><input type="radio" name="nose" value="B" class="answer-B">B. More prominent eyes</label>
+            </div>
+            <div class="test-question-container">
+                <h2 class="question">How your facial bone looks like</h2>
+                <label class="answer"><input type="radio" name="facial_bone" value="A" class="answer-A">A. Less angular bone structure</label>
+                <label class="answer"><input type="radio" name="facial_bone" value="B" class="answer-B">B. More angular bone structure</label>
+            </div>
+            <div class="test-question-container">
+                <h2 class="question">How your features looks like?</h2>
+                <label class="answer"><input type="radio" name="features" value="A" class="answer-A">A. Wider apart</label>
+                <label class="answer"><input type="radio" name="features" value="B" class="answer-B">B. Closer together</label>
+            </div>
+            <button type="submit" class="submit">Submit</button>
+        </form>
     </section>
 
     <script>

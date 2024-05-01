@@ -217,21 +217,20 @@ h2.question{
     padding: 10px;
 }
 
-.answer-btn{
+.answer{
+    display: inline;
+    position: relative;
     font-family: sans-serif;
     font-weight: 150;
-    border: 2px solid #d70675;
-    background: white;
     padding: 10px;
     margin: 15px;
     text-align: center;
-    border-radius: 5px;
     cursor: pointer;
     transition: 0.2s;
 }
 
-.answer-btn:hover{
-    background: #d70675;
+input[type="radio"]:checked + .radio-indicator{
+    background-color: #d70675;
 }
 
 .submit{
