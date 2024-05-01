@@ -94,7 +94,6 @@ h1{
     line-height: 40px;
     -webkit-text-stroke: 1px black;
     letter-spacing: 1px;
-
 }
 
 h2{
@@ -190,6 +189,22 @@ p{
     margin: auto;
     text-align: center;
     padding-top: 100px;
+}
+
+.test-segment h1{
+    margin-top: -5%;
+}
+
+.test-segment p{
+    color: black;
+    font-size: 19px;
+    font-weight: 200;
+    font-family:'Arial';
+    line-height: 20px;
+    padding: 10px;
+    margin: 0% 20% 3%;
+    max-width: 100%;
+    text-align: center;
 }
 
 .test-question-container{
@@ -299,12 +314,17 @@ input[type="radio"]:checked + .radio-indicator{
         padding: 25px;
     }
 
-  .row{
+    .row{
         flex-direction: column;
     }
 
     .test-question-container{
         width: 80%;
+    }
+
+    .test-segment p{
+        font-size: 17px;
+        font-weight: 200;
     }
 
     .image-answer img{
