@@ -2,6 +2,8 @@
 {% block title %}Makeup Test{% endblock %}
 {% block content %}
 
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='makeup_page.css')}}">
+
     <script>
         function validateForm() {
             var questions = document.querySelectorAll('.test-question-container');
