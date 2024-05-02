@@ -31,6 +31,17 @@
 
         <hr class="solid">
     </section>
+
+    <script>
+        var navlinks = document.getElementById("navlinks");
+        function showMenu() {
+            navlinks.style.right = "0";
+        }
+        function hideMenu() {
+            navlinks.style.right = "-200px";
+        }
+    </script>
+
     {% with messages = get_flashed_messages(with_categories=True) %}
         {% if messages %}
           {% for category, message in messages %}
