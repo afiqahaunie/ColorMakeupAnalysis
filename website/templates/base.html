@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+
+</head>
+
+<body>
+    <section class="header">
+        <nav>
+            <div class="nav-links" id="navlinks">
+              <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a id="/" href="/">HOME</a></li>
+                    <li><a id="color" href="color">COLOR</a></li>
+                    <li><a id="makeup" href="makeup">MAKEUP</a></li>
+                    <li><a id="community" href="community">COMMUNITY</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+            <div class="button-container">
+                <a class="custom-button" href="login">Login</a>
+                <a class="custom-button" href="signup">Sign Up</a>
+            </div>
+        </nav>
+
+        <hr class="solid">
+    </section>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+          {% for category, message in messages %}
+          {% if category == "error" %}
+          <div class="alert alert-danger alter-dismissable fade show" role="alert">
+           {{ message }}
+           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+          {% else %}
+          <div class="alert alert-success alter-dismissable fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+          {% endif %}
+
+          {% endfor %}
+        {% endif %}
+    {% endwith %}
+<div class="container">{% block content %}{% endblock %} </div>
+
+</body>
+</html>
