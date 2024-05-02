@@ -2,26 +2,6 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 
-    <section class="header">
-        <nav>
-            <div class="nav-links" id="navlinks">
-              <i class="fa fa-times" onclick="hideMenu()"></i>
-                <ul>
-                    <li><a id="/" href="/">HOME</a></li>
-                    <li><a id="color" href="color">COLOR</a></li>
-                    <li><a id="makeup" href="makeup">MAKEUP</a></li>
-                    <li><a id="community" href="community">COMMUNITY</a></li>
-                </ul>
-            </div>
-            <i class="fa fa-bars" onclick="showMenu()"></i>
-            <div class="button-container">
-                <a class="custom-button" href="login">Login</a>
-                <a class="custom-button" href="signup">Sign Up</a>
-            </div>
-        </nav>
-        <hr class="solid">
-    </section>
-
     <section class="segment">
         <h1>Discover Your True Palette:<br>Where Beauty Unfolds</h1>
         <div class="row">
@@ -46,14 +26,4 @@
         </div>
     </section>
     
-    <script>
-    var navlinks = document.getElementById("navlinks");
-    function showMenu() {
-        navlinks.style.right = "0";
-    }
-    function hideMenu() {
-        navlinks.style.right = "-200px";
-    }
-    </script>
-
 {% endblock %}
