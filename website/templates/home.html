@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-
-<html>
-
-<head>
-    <meta name="viewport" content="width=device-width, initial scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
-</head>
-
-<body>
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
 
     <section class="header">
         <nav>
@@ -54,8 +45,8 @@
            </div>
         </div>
     </section>
-
-<script>
+    
+    <script>
     var navlinks = document.getElementById("navlinks");
     function showMenu() {
         navlinks.style.right = "0";
@@ -63,6 +54,6 @@
     function hideMenu() {
         navlinks.style.right = "-200px";
     }
-</script>
-</body>
-</html>
+    </script>
+
+{% endblock %}
