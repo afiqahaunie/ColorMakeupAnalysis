@@ -94,7 +94,6 @@ h1{
     line-height: 40px;
     -webkit-text-stroke: 1px black;
     letter-spacing: 1px;
-
 }
 
 h2{
@@ -186,19 +185,36 @@ p{
     background-size: cover;
     position: relative;
     width: 100%;
+    height: 100%;
     margin: auto;
     text-align: center;
     padding-top: 100px;
 }
 
+.test-segment h1{
+    margin-top: -5%;
+}
+
+.test-segment p{
+    color: black;
+    font-size: 19px;
+    font-weight: 200;
+    font-family:'Arial';
+    line-height: 20px;
+    padding: 10px;
+    margin: 0% 20% 3%;
+    max-width: 100%;
+    text-align: center;
+}
+
 .test-question-container{
-    margin-top: 5%;
     display: column;
     justify-content: space-between;
-    width: 80%;
-    margin: auto;
+    width: 55%;
     text-align: center;
     padding-top: 50px;
+    margin-top: 5%;
+    margin: auto;
     flex-basis: 31%;
     background: rgb(199, 223, 241);
     border-radius: 10px;
@@ -215,6 +231,7 @@ h2.question{
     text-align: center;
     line-height: 20px;
     padding: 10px;
+    margin-bottom: 5%;
 }
 
 .image-answer-container {
@@ -227,6 +244,13 @@ h2.question{
     flex-direction: column;
     text-align: center;
     margin: 0 10px;
+}
+
+.image-answer img{
+    width: 200px;
+    height: 227px;
+    max-width: 100%;
+    object-fit: cover;
 }
 
 .answer{
@@ -289,33 +313,42 @@ input[type="radio"]:checked + .radio-indicator{
     .nav-links ul{
         padding: 25px;
     }
-}
 
-  .row{
+    .row{
         flex-direction: column;
     }
 
-  .test-question-container.image-answer{
-        width: 100%;
-        height: auto;
+    .test-question-container{
+        width: 80%;
     }
 
-.button-container {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    left: 100px;
-}
+    .test-segment p{
+        font-size: 17px;
+        font-weight: 200;
+    }
 
-.custom-button,
-.custom-button:visited {
-    border: 2px solid rgb(190, 57, 115);
-    padding: 5px 10px;
-    margin-right: 10px;
-    cursor: pointer;
-}
+    .image-answer img{
+        max-width: 90%;
+    }
 
-.custom-button:hover {
-    background: #fccfdc;
-    color: #000;
+    .button-container {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        left: 100px;
+    }
+
+    .custom-button,
+    .custom-button:visited {
+        border: 2px solid rgb(190, 57, 115);
+        padding: 5px 10px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .custom-button:hover {
+        background: #fccfdc;
+        color: #000;
+    }
+
 }

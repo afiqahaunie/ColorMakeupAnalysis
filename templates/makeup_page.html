@@ -47,16 +47,18 @@
     </section>
 
     <section class="test-segment">
+        <h1>Let's get started with us!</h1>
+        <p>Answer all the questions and let us tell you your visual weight so you can know your makeup style!</p>
         <form action="{{ url_for('test_result') }}" method="post" onsubmit="return validateForm()">
             <div class="test-question-container">
                 <h2 class="question">How do your eyes looks like?</h2>
                 <div class="image-answer-container">
                     <div class="image-answer">
-                        <img src="static/small eye.jpg" alt="small eye people" width="200" height="227">
+                        <img src="static/small eye.jpg" alt="small eye people">
                         <label class="answer"><input type="radio" name="eyes" value="A" class="answer-A">A. Smaller eyes</label>
                     </div>
                     <div class="image-answer">
-                        <img src="static/big eye.jpg" alt="big eye people" width="200" height="227">
+                        <img src="static/big eye.jpg" alt="big eye people">
                         <label class="answer"><input type="radio" name="eyes" value="B" class="answer-B">B. Bigger eyes</label>
                     </div>
                 </div>
@@ -65,11 +67,11 @@
                 <h2 class="question">How do your nose looks like?</h2>
                 <div class="image-answer-container">
                     <div class="image-answer">
-                        <img src="static/small eye.jpg" alt="less prominent nose people" width="200" height="227">
+                        <img src="static/less prominent nose.webp" alt="less prominent nose people">
                         <label class="answer"><input type="radio" name="nose" value="A" class="answer-A">A. Less prominent nose</label>
                     </div>
                     <div class="image-answer">
-                        <img src="static/big eye.jpg" alt="prominent nose people" width="200" height="227">
+                        <img src="static/more prominent nose.webp" alt="prominent nose people">
                         <label class="answer"><input type="radio" name="nose" value="B" class="answer-B">B. More prominent nose</label>
                     </div>
                 </div>
@@ -78,11 +80,11 @@
                 <h2 class="question">How do your facial bone looks like?</h2>
                 <div class="image-answer-container">
                     <div class="image-answer">
-                        <img src="static/less angular bone face.jpg" alt="less angular bone face peaople" width="200" height="227">
+                        <img src="static/less angular bone face.jpg" alt="less angular bone face peaople">
                         <label class="answer"><input type="radio" name="facial_bone" value="A" class="answer-A">A. Less angular bone structure</label>
                     </div>
                     <div class="image-answer">
-                        <img src="static/more angular bone face.jpg" alt="more angular bone face people" width="200" height="227">
+                        <img src="static/more angular bone face.jpg" alt="more angular bone face people">
                         <label class="answer"><input type="radio" name="facial_bone" value="B" class="answer-B">B. More angular bone structure</label>
                     </div>
                 </div>
@@ -91,11 +93,11 @@
                 <h2 class="question">How do your features looks like?</h2>
                 <div class="image-answer-container">
                     <div class="image-answer">
-                        <img src="static/wider apart face.jpg" alt="wider face feautures people" width="200" height="227">
+                        <img src="static/wider apart face.jpg" alt="wider face feautures people">
                         <label class="answer"><input type="radio" name="features" value="A" class="answer-A">A. Wider apart</label>
                     </div>
                     <div class="image-answer">
-                        <img src="static/closer together face.jpg" alt="closer face features people" width="200" height="227">
+                        <img src="static/closer together face.jpg" alt="closer face features people">
                         <label class="answer"><input type="radio" name="features" value="B" class="answer-B">B. Closer together</label>
                     </div>
                 </div>
