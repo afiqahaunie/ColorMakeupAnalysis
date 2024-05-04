@@ -2,6 +2,7 @@ from flask import Blueprint, render_template
 from flask_login import login_required, current_user
 from .models import Post
 from . import db
+from flask import request
 
 views = Blueprint("views", __name__)
 
@@ -36,7 +37,7 @@ def makeup():
 
 @views.route('/test_result', methods=['POST'])
 def test_result():
-    return render_template('test_result.html')
+    return render_template('views.test_result.html')
 
 @views.route('/community')
 def community():
