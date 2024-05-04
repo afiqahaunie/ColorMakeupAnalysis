@@ -1,4 +1,4 @@
-from website import create_app, request
+from website import create_app
 
 
 

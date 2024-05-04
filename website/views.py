@@ -37,7 +37,7 @@ def makeup():
 
 @views.route('/test_result', methods=['POST'])
 def test_result():
-    return render_template('test_result.html')
+    return render_template('views.test_result.html')
 
 @views.route('/community')
 def community():
