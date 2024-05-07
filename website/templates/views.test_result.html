@@ -2,5 +2,35 @@
 {% block title %}Test Result{% endblock %}
 {% block content %}
 
+<section class="result-segment">
+    <h1>Test Result</h1>
+    <div>
+        {{ result }}
+    </div>
+    <div class="result-container">
+        {% if visual_type == "low" %}
+        <h3> You are a low visual weight type!</h3>
+        <p>Someone who is a low visual weight type most likely has round and soft face features that can make their face look cuter.
+            Most people feel insecure about their round faces because they feel that they are chubby. However, we can make this feature that you are insecure about become your charm!
+            Follow this video and now you can walk with confidence everywhere you go!</p>
+        <iframe src="https://www.youtube.com/embed/mGycawHYYdE" title="YouTube Shorts Video" frameborder="0" allowfullscreen></iframe>
+        {% elif visual_type == "high" %}
+        <h3> You are a high visual weight type!</h3>
+        <p>Someone who is a high visual weight type most likely has prominent facial features and looks more pronounced from the side.
+            Most people who have a high visual weight usually look elegant when they put on bold or heavy makeup. However, you can also do a 'clean makeup look' to have that natural aura on your face. 
+            Both of these  makeup styles can enhance your features and you will look very confident!
+            Try this suggested way for high visual weight faces and you are good ready to go!</p>
+        <iframe src="https://youtube.com/embed/eIPC25OQf00" title="YouTube Shorts Video" frameborder="0" allowfullscreen></iframe>
+        {% else %}
+        <h3> Maybe you are suitable for both visual weight types!</h3>
+        <p>If you are one of those people who are balanced, then maybe you are suitable for both types of visual weight.  
+            You truly get an advantage as you can try both styles and then go on with the styles that suit your face more!</p>
+        <p>Follow this video if you want to makeup your face with a style that suits low visual weight people.</p>
+        <iframe src="https://www.youtube.com/embed/mGycawHYYdE" title="YouTube Shorts Video" frameborder="0" allowfullscreen></iframe>
+        <p>Meanwhile, you can try this video if you want to do your face with a style that suits people with high visual weight.</p>
+        <iframe src="https://youtube.com/embed/eIPC25OQf00" title="YouTube Shorts Video" frameborder="0" allowfullscreen></iframe>
+        {% endif %}
+    </div>
+</section>
    
     {% endblock %}
