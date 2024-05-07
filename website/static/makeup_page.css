@@ -120,7 +120,7 @@ h2.question{
     font-weight: 150;
     font-family: Arial;
     text-align: center;
-    line-height: 20px;
+    line-height: 1;
     padding: 10px;
     margin-bottom: 3%;
 }
