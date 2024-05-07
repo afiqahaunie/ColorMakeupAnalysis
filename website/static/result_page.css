@@ -8,6 +8,10 @@
     height: max-content;
 }
 
+.tutorial{
+    display: contents;
+}
+
 nav{
     display: flex;
     padding: 2% 6%;
@@ -54,11 +58,11 @@ nav .fa{
     display: none;
 }
 
-hr.solid{
+hr.solid {
     border-top: 3px solid #0e0e0e;
-}
+  }
 
-.test-segment{
+.result-segment{
     min-height: 100vh;
     margin: 0;
     padding: 0; 
@@ -71,110 +75,53 @@ hr.solid{
     height: 100%;
     margin: auto;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 50px;
 }
 
 h1{
     color: rgb(57, 156, 198);
-    font-size: 35px;
+    font-size: 50px;
     font-weight: 500;
     font-family: "Lucida Handwriting", cursive;
     text-align: center;
     line-height: 40px;
+    margin-bottom: 3%;
     -webkit-text-stroke: 1px black;
     letter-spacing: 1px;
-    margin-top: -5%;
+}
+
+h3{
+    font-size: 29px;
+    font-family: 'Roboto';
+    color: #d70675;
+    -webkit-text-stroke: 0.3px black;
+    line-height: 0.9;
+    text-align: center;
+    margin-bottom: 1%;
 }
 
 p{
-    color: black;
-    font-size: 19px;
-    font-weight: 200;
-    font-family:'Arial';
-    line-height: 20px;
-    padding: 10px;
-    margin: 0% 20% 3%;
-    max-width: 100%;
     text-align: center;
-}
-
-.test-question-container{
-    display: column;
-    justify-content: space-between;
-    width: 55%;
-    text-align: center;
-    padding-top: 50px;
-    margin-top: 5%;
-    margin: auto;
-    flex-basis: 31%;
-    background: rgb(199, 223, 241);
-    border-radius: 10px;
-    margin-bottom: 5%;
-    padding: 20px 12px;
-    box-sizing: border-box;
-}
-
-h2.question{
-    color: rgb(9, 9, 9);
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 18px;
     font-weight: 150;
-    font-family: Arial;
-    text-align: center;
-    line-height: 20px;
-    padding: 10px;
-    margin-bottom: 3%;
+    margin: 0 80px;
+    border: none;
+    width: 60%;
 }
 
-.image-answer-container {
-    display: flex;
-    justify-content: space-around;
-}
-
-.image-answer{
+.result-container{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin: 0 10px;
+    height: 100%;
 }
 
-.image-answer img{
-    width: 200px;
-    height: 227px;
-    max-width: 100%;
-    object-fit: cover;
-}
-
-.answer{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
-    font-weight: 150;
-    padding: 10px;
-    margin: 15px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-input{
-    margin-right: 3%;
-}
-
-.submit{
-    font-family: sans-serif;
-    font-weight: 200;
-    border: 2px solid #d70675;
-    background: white;
-    padding: 10px;
-    margin: 10px;
-    margin-bottom: 5%;
-    text-align: center;
-    align-items: center;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.submit:hover{
-    background: #d70675;
+iframe{
+    width: 80%;
+    height: 500px;
+    margin: 20px 10px 40px;
 }
 
 @media(max-width: 700px){
@@ -206,6 +153,10 @@ input{
         padding: 25px;
     }
 
+    .row{
+        flex-direction: column;
+    }
+
     .button-container {
         display: flex;
         align-items: center;
@@ -227,15 +178,6 @@ input{
     }
 
     p{
-        font-size: 17px;
-        font-weight: 200;
-    }
-
-    .test-question-container{
         width: 80%;
-    }
-
-    .image-answer img{
-        max-width: 90%;
     }
 }
