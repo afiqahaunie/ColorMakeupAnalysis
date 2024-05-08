@@ -2,14 +2,26 @@
 {% block title %}Community{% endblock %}
 {% block content %}
 
-<h1 align="center">Make a post</h1>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
 
-<form method="POST">
-    <textarea name="text" id="text" class="form-control"></textarea>
-    <br />
-    <div align="center">
-        <button type="submit" class="brn btn-lg btn-primary">Post</button>
-    </div>
-</form>
+<section class="Community-post">
+    <h1 align="center">Make a post</h1>
 
+    <form method="POST" action="{{ url_for('views.create_post') }}">
+        <textarea name="text" id="text" class="form-control"></textarea>
+        <br />
+        <div align="center">
+            <button type="submit" class="btn btn-lg btn-primary">Post</button>
+        </div>
+    </form>
+
+    <hr>
+
+    <h1 align="center">Community Posts</h1>
+
+{% for post in posts %}
+    <div>{{ post.text }}</div>
+    <hr>
+{% endfor %}
+</section>
 {% endblock %}
