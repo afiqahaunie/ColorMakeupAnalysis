@@ -250,3 +250,19 @@ p{
     background: #fccfdc;
     color: #000;
 }
+
+.upload {
+    display: column;
+    justify-content: space-between;
+    width: 55%;
+    text-align: center;
+    padding-top: 50px;
+    margin-top: 5%;
+    margin: auto;
+    flex-basis: 31%;
+    background: rgb(199, 223, 241);
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+}
