@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, render_template, redirect, url_for, request, flash
 from . import db 
 from .models import User
-from flask_login import login_user, login_required, current_user
+from flask_login import login_user, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 import urllib.request
@@ -26,7 +26,7 @@ def login():
        else: 
           flash('Email does not exist.', category='error')
 
-    return render_template("login.html")
+    return render_template("login.html", user=current_user)
 
 @auth.route("/signup", methods=['GET','POST'])
 def signup():
@@ -57,12 +57,12 @@ def signup():
          flash('User created!')
          return redirect(url_for('views.home'))
       
-      return render_template("signup.html")
+    return render_template("signup.html", user=current_user)
 
 @auth.route("/logout")
 @login_required
-def logout():
-    return redirect(url_for("views.home")) 
+    logout_user()
+    return redirect(url_for("views.home"))  
 
 app = Flask(__name__)
  
@@ -79,7 +79,6 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
      
- 
 @auth.route('/color', methods=['POST'])
 def upload_image():
     if 'file' not in request.files:
