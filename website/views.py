@@ -29,6 +29,11 @@ def color():
 def makeup():
     return render_template("makeup_page.html")
 
+@views.route('/community')
+def community():
+    posts = Post.query.all()
+    return render_template("community_page.html", user=current_user, posts=posts)
+
 @views.route('/test_result', methods=['POST'])
 def test_result():
     # Get user's answers from the form
@@ -61,7 +66,7 @@ def signup():
 def post_page():
     posts = Post.query.all()
     return render_template("post_page.html", posts=posts)
-
+    
 @views.route("/community_page", methods=['GET', 'POST'])
 @login_required
 def create_post():
@@ -75,5 +80,5 @@ def create_post():
             db.session.add(post)
             db.session.commit()
             flash('Post created!', category='success')
-            return redirect(url_for('views.community_page'))  # Redirect to the community page after successfully creating the post
+            return redirect(url_for('views.community'))  # Redirect to the community page after successfully creating the post
     return render_template('community_page.html', user=current_user)
