@@ -1,0 +1,2 @@
+{% extends "base.html" %} {% block title %}Community{% endblock %}
+{% block content %}{% for post in posts %}{{ post.text }}{% endfor %}{% endblock %}
