@@ -2,7 +2,33 @@
 {% block title %}Color{% endblock %}
 {% block content %}
 
-    <section class="bottom">
+
+    <section class="row">
+        <h2>Select a file to upload</h2>
+        <p>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+        </p>
+        {% if filename %}
+            <div>
+                <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image">
+            </div>
+        {% endif %}
+        <form method="post" action="/color" enctype="multipart/form-data">
+            <p>
+                <input type="file" name="file" class="form-control" autocomplete="off" required>
+            </p>
+            <p>
+                <input type="submit" value="Submit" class="btn btn-info">
+            </p>
+        </form>
     </section>
 
     {% endblock %}
