@@ -37,7 +37,23 @@ def makeup():
 
 @views.route('/test_result', methods=['POST'])
 def test_result():
-    return render_template('views.test_result.html')
+    # Get user's answers from the form
+    user_answers = {key: request.form.getlist(key) for key in request.form.keys()}
+    
+    # Calculate total count of "A" and "B" across all questions
+    total_a = sum(answer.count("A") for answer in user_answers.values())
+    total_b = sum(answer.count("B") for answer in user_answers.values())
+
+    # Determine the result based on total counts
+    if total_a > total_b:
+        visual_type = "low"
+    elif total_a < total_b:
+        visual_type = "high"
+    else:
+        visual_type = "mixed"
+
+    # Render a template with the result
+    return render_template('views.test_result.html', visual_type=visual_type)
 
 @views.route('/community')
 def community():
