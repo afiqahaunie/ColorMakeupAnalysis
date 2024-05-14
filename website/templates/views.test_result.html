@@ -33,6 +33,11 @@
         <iframe src="https://youtube.com/embed/eIPC25OQf00" title="YouTube Shorts Video" frameborder="0" allowfullscreen></iframe>
         {% endif %}
     </div>
+    {% if not current_user.is_authenticated %}
+    <div>
+        <h3 class="login-link"><a href="signup">Sign up</a> now to save this result!</h3>
+    </div>
+    {% endif %}
 </section>
    
     {% endblock %}
