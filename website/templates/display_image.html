@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+{% for color in image %}
+    {% if color.image %}
+    <img src="{{ url_for('static', filename='uploads/' + color.image) }}" class="img-fluid" alt="Upload" id="uploaded-image" style="display:none;">
+    {% endif %}
+{% endfor %}
+
+<div id="canvas-section" style="display:none;">
+    <h2>Select Hair, Skin, and Eye Colors</h2>
+    <div id="image-container"></div>
+    <canvas id="image-canvas" width="300" height="300"></canvas>
+    <div id="selected-colors">
+        <div id="hair-color"></div>
+        <div id="skin-color"></div>
+        <div id="eye-color"></div>
+    </div>
+    <div id="color-picker">
+        <button id="select-hair-color">Select Hair Color</button>
+        <button id="select-skin-color">Select Skin Color</button>
+        <button id="select-eye-color">Select Eye Color</button>
+    </div>
+    <button id="generate-palette">Generate Palette</button>
+</div>
+<div id="palette-section" style="display:none;">
+    <h2>Generated Palette</h2>
+    <ul id="palette-colors"></ul>
+</div>
+
+<script>
+    // JavaScript to show canvas-section after image is loaded display image in the canvas
+    window.onload = function() {
+        document.getElementById('canvas-section').style.display = 'block';
+        var canvas = document.getElementById('image-canvas');
+        var ctx = canvas.getContext('2d');
+        var img = document.getElementById('uploaded-image');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
+</script>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+{% endblock %}

@@ -3,32 +3,21 @@
 {% block content %}
 
 <h1>Find your best color!</h1>
-    <section class="upload">
-        <h2>Select a photo to upload</h2>
-        <p>
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                <ul>
-                {% for message in messages %}
-                  <li>{{ message }}</li>
-                {% endfor %}
-                </ul>
-              {% endif %}
-            {% endwith %}
-        </p>
-        {% if filename %}
-            <div>
-                <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image">
-            </div>
-        {% endif %}
-        <form method="post" action="/color" enctype="multipart/form-data">
-            <p>
-                <input type="file" name="file" class="form-control" autocomplete="off" required>
-            </p>
-            <p>
-                <input type="submit" value="Submit" class="btn btn-info">
-            </p>
-        </form>
-    </section>
+<div id="upload-section">
+    <h2>Upload Image</h2>
+    <form method="post" action="/color" enctype="multipart/form-data">
+        <input type="file" name="image" autocomplete="off"><br><br>
+        <button type="submit" class="upload-button">Upload</button>
+    </form>
+</div>
+<div id="image-display-section" style="display:none;">
+    <h2>Uploaded Image</h2>
+    <img id="uploaded-image" src="" alt="Uploaded Image" class="img-fluid">
+</div>
+<div id="canvas-section" style="display:none;">
+    <div align="center">
+        <a href=/display_image><button type="button" class="display-button">Back</button></a>
+    </div>
+</div>
 
-    {% endblock %}
+{% endblock %}
