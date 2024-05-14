@@ -103,7 +103,7 @@ def test_result():
     # Render a template with the result
     return render_template('views.test_result.html', user=current_user)
 
-@auth.route('/previous_result/<int:username>', methods=['GET'])
+@auth.route('/previous_result/<username>', methods=['GET'])
 @login_required
 def previous_result(username):
     user = User.query.filter_by(username=username).first()

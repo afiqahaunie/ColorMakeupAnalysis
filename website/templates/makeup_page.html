@@ -28,7 +28,7 @@
     <section class="test-segment">
         <h1>Let's get started with us!</h1>
         <p>Answer all the questions and let us tell you your visual weight so you can know your makeup style!</p>
-        <form action="{{ url_for('views.test_result') }}" method="post" onsubmit="return validateForm()">
+        <form action="{{ url_for('auth.test_result') }}" method="post" onsubmit="return validateForm()">
             <div class="test-question-container">
                 <h2 class="question">How do your eyes looks like?</h2>
                 <div class="image-answer-container">
