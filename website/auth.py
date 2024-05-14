@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint, render_template, redirect, url_for, request, flash
 from . import db 
-from .models import User
+from flask import session
+from .models import User, Result
 from flask_login import login_user, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -55,9 +56,63 @@ def signup():
          db.session.commit()
          login_user(new_user, remember=True)
          flash('User created!')
+
+         if test_result:
+             new_result = Result(result_data=test_result, user=new_user)
+             db.session.add(new_result)
+             db.session.commit()
+
          return redirect(url_for('views.home'))
       
     return render_template("signup.html", user=current_user)
+
+@auth.route('/test_result', methods=['GET', 'POST'])
+def test_result():
+    if request.method == 'POST':
+
+    # Get user's answers from the form
+            user_answers = {key: request.form.getlist(key) for key in request.form.keys()}
+    
+    # Calculate total count of "A" and "B" across all questions
+            total_a = sum(answer.count("A") for answer in user_answers.values())
+            total_b = sum(answer.count("B") for answer in user_answers.values())
+
+    # Determine the result based on total counts
+            if total_a > total_b:
+                visual_type = "low"
+            elif total_a < total_b:
+                visual_type = "high"
+            else:
+                visual_type = "mixed"
+
+            if current_user.is_authenticated:
+                new_result = Result(result_data=visual_type, user=current_user)
+                db.session.add(new_result)
+                db.session.commit()
+
+            else:
+                session['result'] = visual_type
+
+            previous_result = None
+            if current_user.is_authenticated:
+                if current_user.results:
+                    previous_result = current_user.results[-1].result_data
+
+            return render_template('views.test_result.html', visual_type=visual_type, previous_result=previous_result)
+        
+    # Render a template with the result
+    return render_template('views.test_result.html', user=current_user)
+
+@auth.route('/previous_result/<int:username>', methods=['GET'])
+@login_required
+def previous_result(username):
+    user = User.query.filter_by(username=username).first()
+    if user:
+        previous_result = user.result.result_data if user.result else None
+        return render_template('views.test_result.html', previous_result=previous_result)
+    else:
+        flash('User not found', category='error')
+        return redirect(url_for('views.home'))
 
 @auth.route("/logout")
 @login_required

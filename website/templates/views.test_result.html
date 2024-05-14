@@ -5,18 +5,22 @@
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='result_page.css')}}">
 
 <section class="result-segment">
+    {% if visual_type %}
     <h1>Test Result</h1>
+    {% else %}
+    <h2>Your previous result is...</h2>
+    {% endif %}
     <div>
         {{ result }}
     </div>
     <div class="result-container">
-        {% if visual_type == "low" %}
+        {% if visual_type == "low" or previous_result == "low" %}
         <h3> You are a low visual weight type!</h3>
         <p>Someone who is a low visual weight type most likely has round and soft face features that can make their face look cuter.
             Most people feel insecure about their round faces because they feel that they are chubby. However, we can make this feature that you are insecure about become your charm!
             Follow this video and now you can walk with confidence everywhere you go!</p>
         <iframe src="https://www.youtube.com/embed/mGycawHYYdE" title="YouTube Shorts Video" frameborder="0" allowfullscreen></iframe>
-        {% elif visual_type == "high" %}
+        {% elif visual_type == "high" or previous_result == "high" %}
         <h3> You are a high visual weight type!</h3>
         <p>Someone who is a high visual weight type most likely has prominent facial features and looks more pronounced from the side.
             Most people who have a high visual weight usually look elegant when they put on bold or heavy makeup. However, you can also do a 'clean makeup look' to have that natural aura on your face. 
