@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, current_app
 from flask_login import login_required, current_user
 from .models import Post, Upload
-from .color_analysis import analyze_colors_from_image
 from . import db
 from werkzeug.utils import secure_filename
 from random import choice
@@ -79,8 +78,6 @@ def color():
             filename = secure_filename(image.filename)
             image_path=os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
             image.save(image_path)
-             # Analyze colors from the uploaded image
-            dominant_colors = analyze_colors_from_image(image_path)
             # Process the dominant colors as needed
             color = Upload(image=filename)
         
