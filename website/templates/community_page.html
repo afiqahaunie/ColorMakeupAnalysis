@@ -5,23 +5,66 @@
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
 
 <section class="Community-post">
-    <h1 align="center">Make a post</h1>
-
-    <form method="POST" action="{{ url_for('views.create_post') }}">
-        <textarea name="text" id="text" class="form-control"></textarea>
-        <br />
-        <div align="center">
-            <button type="submit" class="btn btn-lg btn-primary">Post</button>
+    <div class="post-container">
+        <div class="box-post">
+            <h1 align="center">Make a post</h1>
+                <form method="POST" action="{{ url_for('views.create_post') }}">
+                <textarea name="text" id="text" class="form-control"></textarea>
+                    <br />
+                        <div align="center">
+                            <button type="submit" class="btn btn-lg btn-primary">Post</button>
+                        </div>
+                </form>
         </div>
-    </form>
+    </div>
+    <div class="community-container">
+        <h1 align="center">Community Posts</h1>
 
-    <hr>
-
-    <h1 align="center">Community Posts</h1>
-
-{% for post in posts %}
-    <div>{{ post.text }}</div>
-    <hr>
+        {% for post in posts %}
+        <div class="card-border-dark"> 
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <a href ="/posts/{{post.user.username}}">{{post.user.username}}</a>
+                {% if user.id == post.author %}
+                <div class="btn-group">
+                    <button 
+                    type="button" 
+                    class="btn btn-sm btn-primary dropdown-toggle" 
+                    data-bs-toggle="dropdown"
+                    ></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="/delete-post/{{post.id}}" class="dropdown-item">Delete</a></li>
+                    </ul>
+                </div>
+                {% endif %}
+            <div class="card-text">{{post.text}}</div>
+                <br />
+                <div class="collapse" id="comments-{{post.id}}">
+                    <div class="card">
+                        <div class="card-body" id="comments-expanded-{{post.id}}">
+                            {% for comment in post.comments %}
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <a href="/posts/{{post.user.username}}">{{post.user.username}}</a>: {{comment.text}}
+                                </div>
+                            </div>
+                            <div>
+                                <small class="text-muted">{{comment.date}}</small>
+                            </div>
+                            {% endfor %}
+                        </div>  
+                    </div>
+                </div>
+                <form class="input-group mb-3" method='POST' action="{{ url_for('views.create_comment', post_id=post.id) }}">
+                    <input 
+                    type="text" 
+                    name="text" 
+                    class="form-control"
+                    placeholder="Comment something!"/>
+                    <button type="submit" class="btn btn-primary">Comment</button>
+                </form> 
+            </div>
+        </div>     
+    </div>
 {% endfor %}
 </section>
 {% endblock %}
