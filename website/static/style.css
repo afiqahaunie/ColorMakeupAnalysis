@@ -254,18 +254,38 @@ p{
     color: #000;
 }
 
-.upload {
-    display: column;
-    justify-content: space-between;
-    width: 55%;
+#upload-section, #canvas-section, #palette-section {
+    margin: 20px auto;
+    max-width: 800px;
     text-align: center;
-    padding-top: 50px;
-    margin-top: 5%;
-    margin: auto;
-    flex-basis: 31%;
-    background: rgb(199, 223, 241);
-    border-radius: 10px;
-    margin-bottom: 5%;
-    padding: 20px 12px;
-    box-sizing: border-box;
+}
+
+#upload-section input[type="file"], #upload-section button {
+    display: block;
+    margin: 0 auto;
+}
+
+#image-container {
+    position: relative;
+}
+
+#image-container div {
+    position: absolute;
+}
+
+#color-picker button {
+    margin: 10px;
+}
+
+#palette-colors {
+    list-style-type: none;
+    padding: 0;
+}
+
+#palette-colors li {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    border: 1px solid #ccc;
 }
