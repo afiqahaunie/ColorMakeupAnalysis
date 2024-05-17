@@ -9,6 +9,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     posts =db.relationship('Post', backref='user', passive_deletes=True)
     comments =db.relationship('Comment', backref='post', passive_deletes=True)
+    result = db.relationship('Result', backref='user_result', uselist=False)
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
