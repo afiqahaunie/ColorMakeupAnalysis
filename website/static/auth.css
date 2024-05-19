@@ -1,0 +1,89 @@
+#login-form,
+#login-form * {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+#signup-form,
+#signup-form * {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+#login-form {
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+
+    padding: 15px;
+    background: white;
+}
+
+#signup-form {
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+
+    padding: 15px;
+    background: white;
+}
+
+.auth-form__logo-container {
+    padding: 30px;
+    background: rgb(217, 23, 107);
+}
+
+.auth-form__logo {
+    display: block;
+    max-width: 125px;
+    margin: 0 auto;
+}
+.form-group{
+    padding: 30px;
+    background: #eeeeee;
+}
+
+.auth-form__header{
+    margin-bottom: 15px;
+    text-align: center;
+    color: #333333
+}
+
+.auth-form__input{
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #dddddd;
+    background: #ffffff;
+    outline: none;
+    transition: border-color 0.5s;
+}
+
+.auth-form__input:focus {
+    border-color: rgb(217, 23, 107);
+}
+
+.auth-form__input::placeholder {
+    color: #aaaaaa;
+}
+
+.auth-form__button{
+    padding: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    background: rgb(217, 23, 107);
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.auth-form__button:active{
+    background: rgb(217, 23, 107);
+}
