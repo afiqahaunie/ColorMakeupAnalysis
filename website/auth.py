@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, redirect, url_for, request, flash
+from flask import Flask, Blueprint, render_template, redirect, url_for, request, jsonify, flash
 from . import db 
 from flask import session
 from .models import User, Result
@@ -7,26 +7,24 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint("auth", __name__)
 
-@auth.route("/login", methods=['GET','POST'])
+@auth.route("/login", methods=['POST'])
 def login():
-    if request.method == 'POST':
        email = request.form.get("email")
        password = request.form.get("password")
 
        user = User.query.filter_by(email=email).first()
        if user:
           if check_password_hash(user.password, password):
-             flash("Logged in!", category='success')
-             login_user(user, remember=True)
-             return redirect(url_for('views.home'))
+             # Logged in successfully
+            return jsonify({'success': True, 'message': 'Logged in!'})
           else:
-             flash('Password is incorrect.', category='error')
+              # Incorrect password
+            return jsonify({'success': False, 'message': 'Password is incorrect.'})
        else: 
-          flash('Email does not exist.', category='error')
+         # Email does not exist
+        return jsonify({'success': False, 'message': 'Email does not exist.'})
 
-    return render_template("login.html", user=current_user)
-
-@auth.route("/signup", methods=['GET','POST'])
+@auth.route("/signup", methods=['POST'])
 def signup():
     if request.method == 'POST':
       email = request.form.get("email")
@@ -38,32 +36,36 @@ def signup():
       username_exists = User.query.filter_by(username=username).first()
 
       if email_exists:
-         flash('Email is already used.', category='error')
+         return jsonify({'success': False, 'message': 'Email is already used.'})
       elif username_exists:
-         flash('Username is already used.', category='error')
+         return jsonify({'success': False, 'message': 'Username is already used.'})
       elif password1 != password2: 
-         flash('Password don\'t match. Please write again.', category='error')
+         return jsonify({'success': False, 'message': 'Passwords don\'t match. Please write again.'})
       elif len(username) < 2:
-         flash ('Username is too short.', category='error')
+         return jsonify({'success': False, 'message': 'Username is too short.'})
       elif len(password1) < 5:
-         flash ('Password is too short.', category='error')
+         return jsonify({'success': False, 'message': 'Password is too short.'})
       else:
          test_result = session.pop('test_result', None)
-         
-         new_user = User(email=email, username=username, password=generate_password_hash(password1, method='pbkdf2:sha256'))
-         db.session.add(new_user)
-         db.session.commit()
-         login_user(new_user, remember=True)
-         flash('User created!')
 
          if test_result:
              new_result = Result(result_data=test_result, user=new_user)
              db.session.add(new_result)
              db.session.commit()
 
-         return redirect(url_for('views.home'))
-      
-    return render_template("signup.html", user=current_user)
+         new_user = User(email=email, username=username, password=generate_password_hash(password1, method='pbkdf2:sha256'))
+         db.session.add(new_user)
+         db.session.commit()
+         login_user(new_user, remember=True)
+         return jsonify({'success': True, 'message': 'User created!'})
+
+@auth.route("/login", methods=['GET'])
+def login_page():
+    return render_template("login.html")
+
+@auth.route("/signup", methods=['GET'])
+def signup_page():
+    return render_template("signup.html")
 
 @auth.route('/test_result', methods=['GET', 'POST'])
 def test_result():
