@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, render_template, redirect, url_for, request, jsonify, flash
 from . import db 
 from flask import session
-from .models import User, Result
+from .models import User, Result, Post
 from flask_login import login_user, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -99,7 +99,11 @@ def test_result():
                 if current_user.results:
                     previous_result = current_user.results[-1].result_data
 
-            return render_template('views.test_result.html', visual_type=visual_type, previous_result=previous_result)
+            if current_user.is_authenticated and current_user.result:
+                visual_type = current_user.result.result_data
+                related_posts = Post.query.filter_by(visual_type=visual_type).all()
+
+            return render_template('views.test_result.html', visual_type=visual_type, previous_result=previous_result, related_posts=related_posts)
         
     # Render a template with the result
     return render_template('views.test_result.html', user=current_user)
