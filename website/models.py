@@ -17,6 +17,7 @@ class Post(db.Model):
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
     comments = db.relationship('Comment', backref='post_comments', lazy=True)
+    visual_type = db.Column(db.String(255), nullable=True)
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
