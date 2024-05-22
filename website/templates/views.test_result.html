@@ -45,27 +45,31 @@
     <div class="community-post">
         <h2>See post from other people who has the same type as you below!</h2>
         {% if related_posts %}
-            {% for post in related_posts %}
-            <div class="post-container">
-                <div class="post-username">
-                    <h3>{{post.user.username}}</h3>
-                    <hr class="solid">
-                </div>
-                <div class="post-text">
-                    <p>{{ post.text }}</p>
-                </div>
-                <div class="post-date">
-                    <small>{{ post.date_created }}</small>
-                </div>
+            <div class="post-layout">
+                {% for post in related_posts %}
+                    <div class="post-container">
+                        <div class="post-username">
+                            <h3>{{ post.user.username }}</h3>
+                            <hr class="solid">
+                        </div>
+                        <div class="post-text">
+                            <p>{{ post.text  }}</p>
+                        </div>
+                        <div class="post-date">
+                            <small>{{ post.date_created }}</small>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-            <div class="community-recommendation">
-                <h4>Join our community now by <a href="/signup">signing up</a> right now!</h4>
-            </div>
-            {% endfor %}
 
         {% else %}
-            <p>No posts found for the selected visual type.</p>
-        {% endif %}        
+            <p>No post found for the selected visual type.</p>
+        {% endif %}
+    </div>
+    <div class="community-recommendation">
+    {% if not current_user.is_authenticated %}
+        <h3>Join our community now by <a href="/signup">signing up</a> right now!</h3>
+    {% endif %}
     </div>
 </section>
    

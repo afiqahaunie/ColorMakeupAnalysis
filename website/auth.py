@@ -114,7 +114,12 @@ def previous_result(username):
     user = User.query.filter_by(username=username).first()
     if user:
         previous_result = user.result.result_data if user.result else None
-        return render_template('views.test_result.html', previous_result=previous_result)
+
+        related_posts =[]
+        if previous_result:
+            related_posts = Post.query.filter_by(visual_type=previous_result).all()
+
+        return render_template('views.test_result.html', previous_result=previous_result, related_posts=related_posts)
     else:
         flash('User not found', category='error')
         return redirect(url_for('views.home'))

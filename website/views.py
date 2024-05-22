@@ -31,8 +31,16 @@ def makeup():
 
 @views.route('/community')
 def community():
+    comments = Comment.query.all()
     posts = Post.query.all()
-    return render_template("community_page.html", user=current_user, posts=posts)
+
+    visual_type = current_user.result.result_data if current_user.result else None
+    if visual_type:
+        related_posts = Post.query.filter_by(visual_type=visual_type).all()
+    else:
+        related_posts = []
+
+    return render_template("community_page.html", user=current_user, posts=posts, related_posts=related_posts)
 
 @views.route('/login')
 def login():
