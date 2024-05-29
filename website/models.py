@@ -28,6 +28,9 @@ class Comment(db.Model):
 class Upload(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     image = db.Column(db.String(150))
+    hair_color = db.Column(db.String(7))  # Assuming hexadecimal color representation, e.g., "#RRGGBB"
+    skin_color = db.Column(db.String(7))
+    eye_color = db.Column(db.String(7))
      
 class Result(db.Model):
     id = db.Column(db.Integer, primary_key=True)
