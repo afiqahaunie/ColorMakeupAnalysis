@@ -254,7 +254,16 @@ p{
     color: #000;
 }
 
-#upload-section, #canvas-section, #palette-section {
+#upload-section{
+    padding: 20px;
+    border: 20px;
+    margin: auto;
+    max-width: 500px;
+    text-align: center;
+    background: white;
+}
+
+#canvas-section, #palette-section {
     margin: 20px auto;
     max-width: 800px;
     text-align: center;
