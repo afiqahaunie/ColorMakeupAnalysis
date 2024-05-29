@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, current_app
 from flask_login import login_required, current_user
-from .models import Post, Upload, Comment
+from .models import User, Post, Upload, Comment, Like, Upload
 from . import db
 from werkzeug.utils import secure_filename
 from colorsys import hls_to_rgb
@@ -59,17 +59,24 @@ def post_page():
 def create_post():
     if request.method == "POST":
         text = request.form.get('text')
+        photo = request.files.get('photo')
 
         if not text:
             flash('Post cannot be empty', category='error')
         else:
-            visual_type = current_user.result.result_data if current_user.result else None
-            post = Post(text=text, author=current_user.id, visual_type=visual_type)  
+            post = Post(text=text, author=current_user.id)  
+
+            if photo:
+                # Save the uploaded photo
+                filename = secure_filename(photo.filename)
+                photo.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+                post.photo = filename
+                
             db.session.add(post)
             db.session.commit()
             flash('Post created!', category='success')
             return redirect(url_for('views.community'))  # Redirect to the community page after successfully creating the post
-    return render_template('community_page.html', user=current_user)
+    return render_template('community_page.html', user=current_user, posts=posts)
 
 @views.route("/delete-post/<int:id>")
 @login_required
@@ -93,7 +100,7 @@ def create_comment(post_id):
     if not text:
         flash('Comment cannot be empty.', category='error')
     else:
-        post = Post.query.get(post_id)
+        post = Post.query.filter_by(id=post_id).first()
         if post:
             comment = Comment(text=text, author=current_user.id, post_id=post_id)
             db.session.add(comment)
@@ -116,8 +123,28 @@ def delete_comment(comment_id):
     else:
         db.session.delete(comment)
         db.session.commit()
+        flash('Comment deleted.', category='success')
 
     return redirect(url_for('views.community'))
+
+@views.route("/like-post/<post_id>", methods=['POST'])
+@login_required
+def like(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+    like = Like.query.filter_by(author=current_user.id, post_id=post_id).first()
+
+    if not post:
+        return jsonify({'error': 'Post does not exist.'}, 400)
+    elif like:
+        db.session.delete(like)
+        db.session.commit()
+    else:
+        like = Like(author=current_user.id, post_id=post_id)
+        db.session.add(like)
+        db.session.commit()
+
+    return jsonify({"likes": len(post.likes), "liked": any(like.author == current_user.id for like in post.likes)})
+
 
 #UPLOAD PICTURE
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
