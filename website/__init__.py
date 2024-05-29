@@ -5,6 +5,7 @@ from os import path
 from flask_login import LoginManager
 
 db = SQLAlchemy()
+migrate = Migrate()
 DB_NAME = "database.db"
 
 def create_app():
@@ -14,6 +15,7 @@ def create_app():
     app.config['UPLOAD_FOLDER'] = 'website\\static\\uploads'
     db.init_app(app)
     migrate = Migrate(app, db)
+    migrate.init_app(app, db)
 
     from .views import views
     from .auth import auth
@@ -21,7 +23,7 @@ def create_app():
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
 
-    from .models import User, Post, Comment
+    from .models import User, Post, Comment, Like, Upload
 
     create_database(app)
 
