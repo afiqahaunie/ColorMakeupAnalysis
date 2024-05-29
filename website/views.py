@@ -3,8 +3,6 @@ from flask_login import login_required, current_user
 from .models import Post, Upload, Comment
 from . import db
 from werkzeug.utils import secure_filename
-from random import choice
-from sqlalchemy import func
 import os
 
 views = Blueprint("views", __name__)
@@ -131,43 +129,56 @@ def color():
     if request.method == "POST":
         image = request.files.get('image')
 
-        if image and allowed_file(image.filename):
-            filename = secure_filename(image.filename)
-            image_path=os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-            image.save(image_path)
-            # Process the dominant colors as needed
-            color = Upload(image=filename)
+        if not image:
+            return jsonify({'success': False, 'message': 'No image file provided'})
         
-        elif image and not allowed_file(image.filename):
-            flash('Invalid file type. Allowed types are: png, jpg, jpeg', category='error')
-            return redirect(request.url)
+        if not allowed_file(image.filename):
+            return jsonify({'success': False, 'message': 'Invalid file type. Allowed types are: png, jpg, jpeg'})
         
-        else:
-            color = Upload(image=filename)
+        filename = secure_filename(image.filename)
+        image_path=os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+        image.save(image_path)
+
+        color = Upload(image=filename)
         
         db.session.add(color)
         db.session.commit()
-        flash('Image submitted succesfully!', category='success')
-        return redirect(url_for('views.display_image'))
         
-
+        return jsonify({'success': True, 'message': 'Image submitted successfully!'})
+        
     return render_template('color_page.html')
 
-@views.route("/display_image")
+@views.route("/display_image", methods=['GET','POST'])
 def display_image():
+
+    # Initialize variables
+    hair_color = None
+    skin_color = None
+    eye_color = None
+
+    if request.method == 'POST':
+        hair_color = request.form.get('hair_color')
+        skin_color = request.form.get('skin_color')
+        eye_color = request.form.get('eye_color')
+        
+        # Print the form data for debugging
+        print("Received form data:")
+        print("Hair color:", hair_color)
+        print("Skin color:", skin_color)
+        print("Eye color:", eye_color)
+
+        # Get the latest Upload object
+        image = Upload.query.order_by(Upload.id.desc()).first()
+
+        # Update the Upload object with the received form data
+        image.hair_color = hair_color
+        image.skin_color = skin_color
+        image.eye_color = eye_color
+
+        # Save the changes to the database
+        db.session.commit()
+ 
+        return jsonify({'success': True, 'message': 'Color data submitted successfully!'})
+    
     image = Upload.query.order_by(Upload.id.desc()).first()
     return render_template('display_image.html', image=[image])
-
-@views.route('/generate-palette', methods=['POST'])
-def generate_palette():
-    data = request.get_json()
-    hair_color = data['hair_color']
-    skin_color = data['skin_color']
-    eye_color = data['eye_color']
-    processed_colors = process_colors(hair_color, skin_color, eye_color)
-    return jsonify({'palette': processed_colors})
-
-def process_colors(hair_color, skin_color, eye_color):
-    # Implement color processing logic here
-    processed_colors = [hair_color, skin_color, eye_color]
-    return processed_colors
