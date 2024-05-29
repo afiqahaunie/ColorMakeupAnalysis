@@ -64,7 +64,8 @@ def create_post():
         if not text:
             flash('Post cannot be empty', category='error')
         else:
-            post = Post(text=text, author=current_user.id)  
+            visual_type = current_user.result.result_data if current_user.result else None
+            post = Post(text=text, author=current_user.id, visual_type=visual_type)  
             db.session.add(post)
             db.session.commit()
             flash('Post created!', category='success')
