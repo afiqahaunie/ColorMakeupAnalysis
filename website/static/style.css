@@ -195,7 +195,7 @@ p{
         transition: 0.5s;
     }
 
-    .material-symbols-outlined{
+    nav .material-symbols-outlined{
         display: block;
         color: white;
         margin: 10px;
