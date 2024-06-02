@@ -14,20 +14,25 @@ class User(db.Model, UserMixin):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text, nullable=False)
-    date_created = db.Column(db.DateTime(timezone=True), default=func.now())
+    photo = db.Column(db.String(255)) 
+    date = db.Column(db.DateTime(timezone=True), default=func.now())
     author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
-    comments = db.relationship('Comment', backref='post_comments', lazy=True)
-    visual_type = db.Column(db.String(255), nullable=True)
+    comments = db.relationship('Comment', backref='post', passive_deletes=True)
+    likes = db.relationship('Like', backref='post', passive_deletes=True)
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(200), nullable=False)
+    text = db.Column(db.Text, nullable=False)
+    date = db.Column(db.DateTime(timezone=True), default=func.now())
     author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id', ondelete="CASCADE"), nullable=False)
 
 class Upload(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     image = db.Column(db.String(150))
+    hair_color = db.Column(db.String(7))  # Assuming hexadecimal color representation, e.g., "#RRGGBB"
+    skin_color = db.Column(db.String(7))
+    eye_color = db.Column(db.String(7))
      
 class Result(db.Model):
     id = db.Column(db.Integer, primary_key=True)

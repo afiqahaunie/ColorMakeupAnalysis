@@ -253,7 +253,16 @@ p{
     color: #000;
 }
 
-#upload-section, #canvas-section, #palette-section {
+#upload-section{
+    padding: 20px;
+    border: 20px;
+    margin: auto;
+    max-width: 500px;
+    text-align: center;
+    background: white;
+}
+
+#canvas-section, #palette-section {
     margin: 20px auto;
     max-width: 800px;
     text-align: center;
@@ -315,4 +324,16 @@ p{
 .post_container{
     display: flex;
     justify-content: space-around;
+}
+
+.upload-button, #submit-colors, #select-hair-color, #select-skin-color, #select-eye-color {
+    border: 2px solid rgb(190, 57, 115);
+    padding: 5px 10px;
+    margin: auto;
+    cursor: pointer;
+}
+
+#submit-colors:hover, #select-hair-color:hover, #select-skin-color:hover, #select-eye-color:hover {
+    background: #fccfdc;
+    color: #000;
 }

@@ -9,35 +9,72 @@
 {% endfor %}
 
 <div id="canvas-section" style="display:none;">
-    <h2>Select Hair, Skin, and Eye Colors</h2>
+    <h2>Step 2 :</h2><h3>Select Hair, Skin, and Eye Colors</h3>
     <div id="image-container"></div>
     <canvas id="image-canvas" width="300" height="300"></canvas>
-    <div id="selected-colors">
-        <div id="hair-color"></div>
-        <div id="skin-color"></div>
-        <div id="eye-color"></div>
-    </div>
     <div id="color-picker">
-        <button id="select-hair-color">Select Hair Color</button>
-        <button id="select-skin-color">Select Skin Color</button>
-        <button id="select-eye-color">Select Eye Color</button>
+        <button id="select-hair-color">Hair Color</button>
+        <button id="select-skin-color">Skin Color</button>
+        <button id="select-eye-color">Eye Color</button>
     </div>
-    <button id="generate-palette">Generate Palette</button>
+    <form method="POST" enctype="multipart/form-data" id="color-selection-form">
+        <div id="selected-colors">
+            <div id="hair-color"></div>
+            <div id="skin-color"></div>
+            <div id="eye-color"></div>
+            <input type="hidden" id="hair-color-input" name="hair_color">
+            <input type="hidden" id="skin-color-input" name="skin_color">
+            <input type="hidden" id="eye-color-input" name="eye_color">
+        </div>
+        <button type="submit" id="submit-colors" style="display:none;">Submit</button>
+    </form>
 </div>
-<div id="palette-section" style="display:none;">
-    <h2>Generated Palette</h2>
-    <ul id="palette-colors"></ul>
-</div>
+<div id="color-analysis">
+    <h2>Color Analysis</h2>
+    <p>Seasonal Palette: {{ seasonal_palette }}</p>
+    <p>Suggested Palette: {{ suggested_palette }}</p>
 
+    <div class="result-container">
+        {% if seasonal_palette == "Winter" %}
+        <img src="static/winter.png" alt="Winter">
+        {% elif seasonal_palette == "Spring" %}
+        <img src="static/spring.png" alt="Spring">
+        {% elif seasonal_palette == "Summer" %}
+        <img src="static/summer.png" alt="Summer">
+        {% elif seasonal_palette == "Autumn" %}
+        <img src="static/autumn.png" alt="Autumn">
+        {% elif seasonal_palette == "Soft Autumn" %}
+        <img src="static/soft autumn.png" alt="Soft Autumn">
+        {% elif seasonal_palette == "Soft Summer" %}
+        <img src="static/soft summer.png" alt="Soft Summer">
+        {% elif seasonal_palette == "Deep Autumn" %}
+        <img src="static/deep autumn.png" alt="Deep Autumn">
+        {% elif seasonal_palette == "Deep Winter" %}
+        <img src="static/deep winter.png" alt="Deep Winter">
+        {% endif %}
+    </div>
+</div>
 <script>
-    // JavaScript to show canvas-section after image is loaded display image in the canvas
-    window.onload = function() {
-        document.getElementById('canvas-section').style.display = 'block';
-        var canvas = document.getElementById('image-canvas');
-        var ctx = canvas.getContext('2d');
-        var img = document.getElementById('uploaded-image');
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    };
+    document.getElementById('color-selection-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+            
+        fetch('/display_image', {
+            method: 'POST',
+            body: new FormData(this)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                window.location.href = "{{ url_for('views.display_image') }}";
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
 </script>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>

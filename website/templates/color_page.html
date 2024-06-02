@@ -4,8 +4,8 @@
 
 <h1>Find your best color!</h1>
 <div id="upload-section">
-    <h2>Upload Image</h2>
-    <form method="post" action="/color" enctype="multipart/form-data">
+    <h2>Step 1:</h2><h3>Upload Image</h3>
+    <form method="post" id="upload-form" action="/color" enctype="multipart/form-data">
         <input type="file" name="image" autocomplete="off"><br><br>
         <button type="submit" class="upload-button">Upload</button>
     </form>
@@ -19,5 +19,28 @@
         <a href=/display_image><button type="button" class="display-button">Back</button></a>
     </div>
 </div>
+
+<script>
+    document.getElementById('upload-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        fetch('/color', {
+            method: 'POST',
+            body: new FormData(this)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                window.location.href = "{{ url_for('views.display_image') }}" ;
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
 
 {% endblock %}
