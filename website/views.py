@@ -34,13 +34,18 @@ def community():
     comments = Comment.query.all()
     posts = Post.query.all()
 
-    visual_type = current_user.result.result_data if current_user.result else None
-    if visual_type:
-        related_posts = Post.query.filter_by(visual_type=visual_type).all()
+    if current_user.is_authenticated:
+        visual_type = current_user.result.result_data if current_user.result else None
+        if visual_type:
+            related_posts = Post.query.filter_by(visual_type=visual_type).all()
+        else:
+            related_posts = []
+
     else:
+        visual_type = None
         related_posts = []
 
-    return render_template("community_page.html", user=current_user, posts=posts, related_posts=related_posts)
+    return render_template("community_page.html", user=current_user, posts=posts, comments=comments, related_posts=related_posts)
 
 @views.route('/login')
 def login():
@@ -64,7 +69,10 @@ def create_post():
         if not text:
             flash('Post cannot be empty', category='error')
         else:
-            visual_type = current_user.result.result_data if current_user.result else None
+            visual_type = None
+            if current_user.result:
+                visual_type = current_user.result.result_data 
+                
             post = Post(text=text, author=current_user.id, visual_type=visual_type)  
             db.session.add(post)
             db.session.commit()
