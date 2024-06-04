@@ -259,7 +259,7 @@ p{
     margin: auto;
     max-width: 500px;
     text-align: center;
-    background: white;
+    background: aliceblue;
 }
 
 #canvas-section, #palette-section {
@@ -336,4 +336,13 @@ p{
 #submit-colors:hover, #select-hair-color:hover, #select-skin-color:hover, #select-eye-color:hover {
     background: #fccfdc;
     color: #000;
+}
+
+.result-container {
+    width: 600px;
+    position: relative;
+    margin: auto;
+    text-align: center;
+    padding: 50px;
+    background-color: aliceblue;
 }

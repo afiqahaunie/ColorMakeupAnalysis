@@ -17,7 +17,7 @@
         <button id="select-skin-color">Skin Color</button>
         <button id="select-eye-color">Eye Color</button>
     </div>
-    <form method="POST" enctype="multipart/form-data" id="color-selection-form">
+    <form method="POST" enctype="multipart/form-data" id="color-selection-form" action="{{ url_for('views.results') }}">
         <div id="selected-colors">
             <div id="hair-color"></div>
             <div id="skin-color"></div>
@@ -29,36 +29,12 @@
         <button type="submit" id="submit-colors" style="display:none;">Submit</button>
     </form>
 </div>
-<div id="color-analysis">
-    <h2>Color Analysis</h2>
-    <p>Seasonal Palette: {{ seasonal_palette }}</p>
-    <p>Suggested Palette: {{ suggested_palette }}</p>
 
-    <div class="result-container">
-        {% if seasonal_palette == "Winter" %}
-        <img src="static/winter.png" alt="Winter">
-        {% elif seasonal_palette == "Spring" %}
-        <img src="static/spring.png" alt="Spring">
-        {% elif seasonal_palette == "Summer" %}
-        <img src="static/summer.png" alt="Summer">
-        {% elif seasonal_palette == "Autumn" %}
-        <img src="static/autumn.png" alt="Autumn">
-        {% elif seasonal_palette == "Soft Autumn" %}
-        <img src="static/soft autumn.png" alt="Soft Autumn">
-        {% elif seasonal_palette == "Soft Summer" %}
-        <img src="static/soft summer.png" alt="Soft Summer">
-        {% elif seasonal_palette == "Deep Autumn" %}
-        <img src="static/deep autumn.png" alt="Deep Autumn">
-        {% elif seasonal_palette == "Deep Winter" %}
-        <img src="static/deep winter.png" alt="Deep Winter">
-        {% endif %}
-    </div>
-</div>
 <script>
     document.getElementById('color-selection-form').addEventListener('submit', function(event) {
         event.preventDefault();
             
-        fetch('/display_image', {
+        fetch('/results', {
             method: 'POST',
             body: new FormData(this)
         })
@@ -66,7 +42,7 @@
         .then(data => {
             if (data.success) {
                 alert(data.message);
-                window.location.href = "{{ url_for('views.display_image') }}";
+                window.location.href = "{{ url_for('views.results') }}";
             } else {
                 alert(data.message);
             }
