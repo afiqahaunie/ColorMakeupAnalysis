@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, current_app
 from flask_login import login_required, current_user
-from .models import User, Post, Upload, Comment, Like, Upload
+from .models import User,Post, Upload, Comment, Like, Upload
 from . import db
 from werkzeug.utils import secure_filename
 from colorsys import hls_to_rgb
@@ -28,18 +28,10 @@ def home():
 def makeup():
     return render_template("makeup_page.html")
 
-@views.route('/community')
+@views.route("/community")
 def community():
-    comments = Comment.query.all()
     posts = Post.query.all()
-
-    visual_type = current_user.result.result_data if current_user.result else None
-    if visual_type:
-        related_posts = Post.query.filter_by(visual_type=visual_type).all()
-    else:
-        related_posts = []
-
-    return render_template("community_page.html", user=current_user, posts=posts, related_posts=related_posts)
+    return render_template('community_page.html',user=current_user, posts=posts)
 
 @views.route('/login')
 def login():
@@ -53,24 +45,29 @@ def signup():
 def post_page():
     posts = Post.query.all()
     return render_template("post_page.html", posts=posts)
+
+@views.route("/posts.comment/<username>")
+@login_required
+def posts(username):
+    user = User.query.filter_by(username=username).first()
+
+    if not user:
+        flash('No user with that username exists.', category='error')
+        return redirect(url_for('views.community'))
     
+    posts = user.posts
+    return render_template("community_page.html", user=current_user, posts=posts, username=username)
+
 @views.route("/community_page", methods=['GET', 'POST'])
 @login_required
 def create_post():
     if request.method == "POST":
         text = request.form.get('text')
-        photo = request.files.get('photo')
-
+        
         if not text:
             flash('Post cannot be empty', category='error')
         else:
             post = Post(text=text, author=current_user.id)  
-
-            if photo:
-                # Save the uploaded photo
-                filename = secure_filename(photo.filename)
-                photo.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-                post.photo = filename
                 
             db.session.add(post)
             db.session.commit()
@@ -102,7 +99,7 @@ def create_comment(post_id):
     else:
         post = Post.query.filter_by(id=post_id).first()
         if post:
-            comment = Comment(text=text, author=current_user.id, post_id=post_id)
+            comment = Comment(text=text, author=current_user.id, post_id=post_id)  # Use current_user.id
             db.session.add(comment)
             db.session.commit()
             flash('Comment created!', category='success')

@@ -13,7 +13,9 @@ def create_app():
     app.config['SECRET_KEY'] = "itgurl"
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['UPLOAD_FOLDER'] = 'website\\static\\uploads'
+
     db.init_app(app)
+    
     migrate = Migrate(app, db)
     migrate.init_app(app, db)
 
