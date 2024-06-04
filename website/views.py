@@ -43,7 +43,7 @@ def community():
         visual_type = None
         related_posts = []
 
-    return render_template("community_page.html", user=current_user, posts=posts, comments=comments, related_posts=related_posts)
+    return render_template("community_page.html", user=current_user, posts=posts, comments=Comment, related_posts=related_posts)
 
 
 @views.route('/login')
@@ -84,11 +84,6 @@ def create_post():
             if current_user.result:
                 visual_type = current_user.result.result_data 
             
-            if photo:
-                # Save the uploaded photo
-                filename = secure_filename(photo.filename)
-                photo.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-                post.photo = filename
              
             post = Post(text=text, author=current_user.id, visual_type=visual_type)  
 
