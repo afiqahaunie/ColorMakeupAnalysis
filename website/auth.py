@@ -99,9 +99,9 @@ def test_result():
                 if current_user.results:
                     previous_result = current_user.results[-1].result_data
 
-            if current_user.is_authenticated and current_user.result:
-                visual_type = current_user.result.result_data
-                related_posts = Post.query.filter_by(visual_type=visual_type).all()
+            related_posts =[]
+            if previous_result:
+                related_posts = Post.query.filter_by(visual_type=previous_result).all()
 
             return render_template('views.test_result.html', visual_type=visual_type, previous_result=previous_result, related_posts=related_posts)
         
