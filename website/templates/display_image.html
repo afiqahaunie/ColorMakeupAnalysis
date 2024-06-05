@@ -19,8 +19,11 @@
     </div>
     <form method="POST" enctype="multipart/form-data" id="color-selection-form" action="{{ url_for('views.results') }}">
         <div id="selected-colors">
+            <p>Hair Color:</p>
             <div id="hair-color"></div>
+            <p>Skin Color:</p>
             <div id="skin-color"></div>
+            <p>Eye Color:</p>
             <div id="eye-color"></div>
             <input type="hidden" id="hair-color-input" name="hair_color">
             <input type="hidden" id="skin-color-input" name="skin_color">

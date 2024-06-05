@@ -20,17 +20,15 @@
                     <li><a id="color" href="color">COLOR</a></li>
                     <li><a id="makeup" href="makeup">MAKEUP</a></li>
                     <li><a id="community" href="community">COMMUNITY</a></li>
+                    {% if user and user.is_authenticated %}
+                    <li><a id="logout" href="logout">LOGOUT</a></li>
+                    {% else %}
+                    <li><a id="login" href="login">LOGIN</a></li>
+                    <li><a id="signup" href="signup">SIGNUP</a></li>
+                    {% endif %}
                 </ul>
             </div>
             <i class="material-symbols-outlined" onclick="showMenu()">Menu</i>
-            <div class="button-container">
-                {% if user and user.is_authenticated %}
-                  <a class="custom-button" href="login">Logout</a>
-                {% else %}
-                  <a class="custom-button" href="login">Login</a>
-                  <a class="custom-button" href="signup">Sign Up</a>
-                {% endif %}
-            </div>
         </nav>
 
         <hr class="solid">
