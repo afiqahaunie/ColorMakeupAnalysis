@@ -6,21 +6,25 @@
 
     <script>
         function validateForm() {
-            var questions = document.querySelectorAll('.test-question-container');
+            var questions = document.querySelectorAll('.test-question-container'); // Select all elements from the class
             for (var i = 0; i < questions.length; i++) {
+                // Select all radio buttons within the current question container
                 var radios = questions[i].querySelectorAll('input[type="radio"]');
                 var checked = false;
                 for (var j = 0; j < radios.length; j++) {
+                    // If a radion button is checked,  set the 'checked' to true adn break from loop
                     if (radios[j].checked) {
                         checked = true;
                         break;
                     }
                 }
+                // If no radion button is checked, display an alert message and return false
                 if (!checked) {
                     alert("Please answer all questions before submitting.");
                     return false;
                 }
             }
+            // If all questions have been answered, return true 
             return true;
         }
     </script>
@@ -30,7 +34,7 @@
         <p>Answer all the questions and let us tell you your visual weight so you can know your makeup style!</p>
         <form action="{{ url_for('auth.test_result') }}" method="post" onsubmit="return validateForm()">
             <div class="test-question-container">
-                <h2 class="question">How do your eyes looks like?</h2>
+                <h2 class="question">How do your eyes looks like?</h2> <!-- Question for makeup test-->
                 <div class="image-answer-container">
                     <div class="image-answer">
                         <img src="static/images/small eye.jpg" alt="small eye people">
@@ -43,7 +47,7 @@
                 </div>
             </div>
             <div class="test-question-container">
-                <h2 class="question">How do your nose looks like?</h2>
+                <h2 class="question">How do your nose looks like?</h2> <!-- Question for makeup test-->
                 <div class="image-answer-container">
                     <div class="image-answer">
                         <img src="static/images/less prominent nose.webp" alt="less prominent nose people">
@@ -56,7 +60,7 @@
                 </div>
             </div>
             <div class="test-question-container">
-                <h2 class="question">How do your facial bone looks like?</h2>
+                <h2 class="question">How do your facial bone looks like?</h2> <!-- Question for makeup test-->
                 <div class="image-answer-container">
                     <div class="image-answer">
                         <img src="static/images/less angular bone face.jpg" alt="less angular bone face peaople">
@@ -69,7 +73,7 @@
                 </div>
             </div>
             <div class="test-question-container">
-                <h2 class="question">How do your features looks like?</h2>
+                <h2 class="question">How do your features looks like?</h2> <!-- Question for makeup test-->
                 <div class="image-answer-container">
                     <div class="image-answer">
                         <img src="static/images/wider apart face.jpg" alt="wider face feautures people">
