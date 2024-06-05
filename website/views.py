@@ -77,26 +77,28 @@ def create_post():
     if request.method == "POST":
         text = request.form.get('text')
         photo = request.files.get('photo')
-        
+
         if not text:
             flash('Post cannot be empty', category='error')
         else:
-            visual_type = None
-            if current_user.result:
-                visual_type = current_user.result.result_data 
-            
-            if photo:
+            filename = None
+            if photo and allowed_file(photo.filename):
                 # Save the uploaded photo
                 filename = secure_filename(photo.filename)
                 photo.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-                post.photo = filename
-             
-            post = Post(text=text, author=current_user.id, visual_type=visual_type)  
-
+            elif photo and not allowed_file(photo.filename):
+                flash('Invalid file type', category='error')
+                return redirect(request.url)
+            
+            post = Post(text=text, author=current_user.id, photo=filename)
+            
             db.session.add(post)
             db.session.commit()
             flash('Post created!', category='success')
             return redirect(url_for('views.community'))  # Redirect to the community page after successfully creating the post
+
+    # Fetch posts to display on the page
+    posts = Post.query.order_by(Post.date.desc()).all()
     return render_template('community_page.html', user=current_user, posts=posts)
 
 @views.route("/delete-post/<int:id>")
