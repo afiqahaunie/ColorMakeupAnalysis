@@ -37,6 +37,7 @@ class Upload(db.Model):
     hair_color = db.Column(db.String(7))  # Assuming hexadecimal color representation, e.g., "#RRGGBB"
     skin_color = db.Column(db.String(7))
     eye_color = db.Column(db.String(7))
+    seasonal_palette = db.Column(db.String(255))
      
 class Result(db.Model):
     id = db.Column(db.Integer, primary_key=True)

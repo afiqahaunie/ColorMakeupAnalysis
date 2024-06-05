@@ -76,6 +76,7 @@ def posts(username):
 def create_post():
     if request.method == "POST":
         text = request.form.get('text')
+        photo = request.files.get('photo')
         
         if not text:
             flash('Post cannot be empty', category='error')
@@ -219,6 +220,7 @@ def results():
         image.hair_color = hair_color
         image.skin_color = skin_color
         image.eye_color = eye_color
+        image.seasonal_palette = seasonal_palette
         db.session.commit()
 
         # Redirect to results page with seasonal_palette as a query parameter
