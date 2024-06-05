@@ -53,6 +53,11 @@ nav .material-symbols-outlined{
     display: none;
 }
 
+#logout, #signup, #login{
+    color:darkblue;
+    font-weight: bold;
+}
+
 hr.solid {
     border-top: 3px solid #0e0e0e;
   }
@@ -338,7 +343,7 @@ p{
     color: #000;
 }
 
-.result-container {
+.color-palette {
     width: 600px;
     position: relative;
     margin: auto;

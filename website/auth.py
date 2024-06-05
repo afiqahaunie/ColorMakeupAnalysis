@@ -15,6 +15,7 @@ def login():
        user = User.query.filter_by(email=email).first()
        if user:
           if check_password_hash(user.password, password):
+            login_user(user)
              # Logged in successfully
             return jsonify({'success': True, 'message': 'Logged in!'})
           else:
