@@ -33,9 +33,9 @@ def community():
     posts = Post.query.all()
     
     if current_user.is_authenticated:
-        visual_type = current_user.result.result_data if current_user.result else None
+        visual_type = current_user.result.result_data if current_user.result else None # Fetch user's result from result table
         if visual_type:
-            related_posts = Post.query.filter_by(visual_type=visual_type).all()
+            related_posts = Post.query.filter_by(visual_type=visual_type).all() # Relate the post with user's result of makeup test
         else:
             related_posts = []
 
@@ -81,6 +81,10 @@ def create_post():
         if not text:
             flash('Post cannot be empty', category='error')
         else:
+            visual_type = None
+            if current_user.result:
+                visual_type = current_user.result.result_data # Relate the post with user's result of makeup test
+
             filename = None
             if photo and allowed_file(photo.filename):
                 # Save the uploaded photo
@@ -90,7 +94,7 @@ def create_post():
                 flash('Invalid file type', category='error')
                 return redirect(request.url)
             
-            post = Post(text=text, author=current_user.id, photo=filename)
+            post = Post(text=text, author=current_user.id, photo=filename, visual_type=visual_type)
             
             db.session.add(post)
             db.session.commit()

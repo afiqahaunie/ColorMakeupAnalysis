@@ -144,10 +144,11 @@ iframe{
 }
 
 .post-container{
-    background-color: lightblue;
+    background-color: white;
     padding: 0 20px 10px;
     border-radius: 8px;
     margin: 0px 20px;
+    position: relative;
 }
 
 .post-username h3{
@@ -162,6 +163,10 @@ iframe{
     margin: 15px 0;
     margin-bottom: 10px;
     text-align: left;
+}
+
+.post-photo{
+    max-width: 100%;
 }
 
 .post-date {
@@ -231,6 +236,15 @@ iframe{
     }
 
     p{
+        width: 80%;
+    }
+
+    .post-layout{
+        display: block;
+        column-count: 1;
+    }
+
+    .post-container{
         width: 80%;
     }
 }
