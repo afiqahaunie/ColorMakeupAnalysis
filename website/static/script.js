@@ -32,11 +32,11 @@ function pickColor(colorType) {
         colorDiv.style.backgroundColor = colorHex;
         colorDiv.textContent = colorHex;
 
-        // Store selected color
-        selectedColors[colorType] = colorHex;
-
         // Remove event listener after color selection
         canvas.removeEventListener('click', arguments.callee);
+
+        // Store selected color
+        selectedColors[colorType] = colorHex;
 
         // Populate hidden input field with selected color
         var colorInput = document.getElementById(colorType + '-color-input');
@@ -63,6 +63,18 @@ document.getElementById('select-skin-color').addEventListener('click', function(
 
 document.getElementById('select-eye-color').addEventListener('click', function() {
     pickColor('eye');
+});
+
+document.getElementById('color-selection-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    // Set hidden input fields with selected colors
+    document.getElementById('hair-color-input').value = selectedColors.hair;
+    document.getElementById('skin-color-input').value = selectedColors.skin;
+    document.getElementById('eye-color-input').value = selectedColors.eye;
+    
+    // Submit the form
+    event.target.submit();
 });
 
 // Function to convert RGB to hexadecimal color
