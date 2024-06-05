@@ -3,13 +3,17 @@
 {% block content %}
 
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
 
 <section class="Community-post">
     <div class="post-container">
         <div class="box-post">
                 <h1 align="center">Make a post</h1>
-                <form method="POST" action="{{ url_for('views.create_post') }}">
+                <form method="POST" action="{{ url_for('views.create_post') }}" enctype="multipart/form-data">
                     <textarea name="text" id="text" class="form-control"></textarea>
+                    <br />
+                    <input type="file" name="photo" accept="image/*">
+                    <br />
                     <div align="center">
                         <button type="submit" class="btn btn-lg btn-primary">Post</button>
                     </div>
@@ -43,6 +47,9 @@
                     </div>
                 </div>
                 <div class="card-text">{{ post.text }}</div>
+                {% if post.photo %}
+                <img src="{{ url_for('static', filename='uploads/' + post.photo) }}" alt="Photo" width="350" height="300">
+                {% endif %}
                 <br />
                 <div class="collapse" id="comments-{{ post.id }}">
                     <div class="card">
