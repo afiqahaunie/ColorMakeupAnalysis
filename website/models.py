@@ -26,6 +26,7 @@ class Comment(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id', ondelete="CASCADE"), nullable=False)
+    author_username = db.relationship('User', backref='comments', lazy=True)
 
 class Like(db.Model):
     id = db.Column(db.Integer, primary_key=True)
