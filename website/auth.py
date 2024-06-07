@@ -88,24 +88,29 @@ def test_result():
         else:
             visual_type = "mixed"
 
+        # Save user's result in session if they are not signed up yet
+        session['result'] = visual_type
+
+        previous_result = session.get('result')
+        related_posts = []
+        
+        # If the user is authenticated, fetch related posts based on their previous result
         if current_user.is_authenticated:
             new_result = Result(result_data=visual_type, user=current_user) # Save user's result in database
             db.session.add(new_result)
             db.session.commit()
 
-        else:
-            session['result'] = visual_type # Save user's result in session if they not sign up yet
-
-        previous_result = None
-        if current_user.is_authenticated:
             if current_user.results:
                 previous_result = current_user.results[-1].result_data
 
-        related_posts =[]
-        if previous_result:
-            related_posts = Post.query.filter_by(visual_type=previous_result).all()
-            # Display related post from community based on user's visual type
+            if previous_result:
+                related_posts = Post.query.filter_by(visual_type=previous_result).all()
 
+        # If the user is not authenticated, fetch related posts based on session data
+        else:
+            if previous_result:
+                related_posts = Post.query.filter_by(visual_type=previous_result).all()
+        
         return render_template('views.test_result.html', visual_type=visual_type, previous_result=previous_result, related_posts=related_posts)
         
     # Render a template with the result

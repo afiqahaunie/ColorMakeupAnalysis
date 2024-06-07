@@ -38,21 +38,23 @@
         {% if related_posts %} <!-- Display related post from community based on user's visual type -->
             <div class="post-layout">
                 {% for post in related_posts %}
-                    <div class="post-container">
-                        <div class="post-username">
-                            <h3>{{ post.user.username }}</h3>
-                            <hr class="solid">
+                    <a href="{{ url_for('views.community') }}">
+                        <div class="post-container">
+                            <div class="post-username">
+                                <h3>{{ post.user.username }}</h3>
+                                <hr class="solid">
+                            </div>
+                            <div class="post-text">
+                                <p>{{ post.text  }}</p>
+                                {% if post.photo %}
+                                <img src="{{ url_for('static', filename='uploads/' + post.photo) }}" alt="Post Image" class="post-photo">
+                                {% endif %}
+                            </div>
+                            <div class="post-date">
+                                <small>{{ post.date }}</small>
+                            </div>
                         </div>
-                        <div class="post-text">
-                            <p>{{ post.text  }}</p>
-                            {% if post.photo %}
-                            <img src="{{ url_for('static', filename='uploads/' + post.photo) }}" alt="Post Image" class="post-photo">
-                            {% endif %}
-                        </div>
-                        <div class="post-date">
-                            <small>{{ post.date }}</small>
-                        </div>
-                    </div>
+                    </a>
                 {% endfor %}
             </div>
 

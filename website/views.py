@@ -26,7 +26,7 @@ def home():
 
 @views.route('/makeup')
 def makeup():
-    return render_template("makeup_page.html")
+    return render_template("makeup_page.html", user=current_user)
 
 @views.route("/community")
 def community():
@@ -201,7 +201,7 @@ def color():
         
         return jsonify({'success': True, 'message': 'Image submitted successfully!'})
         
-    return render_template('color_page.html')
+    return render_template('color_page.html', user=current_user)
 
 @views.route("/display_image", methods=['GET','POST'])
 def display_image():
