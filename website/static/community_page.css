@@ -1,0 +1,269 @@
+@font-face {
+    font-family: 'Kaoly';
+    src: url("/static/fonts/Kaoly Demo-Regular.ttf") format("opentype");
+}
+
+@font-face {
+    font-family: 'BoogieBoys';
+    src: url("/static/fonts/BoogieBoys.ttf") format("opentype");
+}
+
+/* Apply the font to the entire body */
+body {
+    font-family: 'BoogieBoys';
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+/* Ensure the font is applied to specific elements */
+.box-post h1, .community-container h1 {
+    font-family: 'Kaoly'; /* Add this line */
+    margin-top: 0;
+    color: rgb(217, 23, 107);
+}
+
+/* Additional CSS styles as per previous code */
+header {
+    background-color:#333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.container-community {
+    display: flex;
+    margin: 20px;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 1rem;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #333333;
+    font-weight: bold;
+}
+
+.sidebar nav ul li a:hover {
+    color: #007BFF;
+}
+
+/* .content {
+    flex-grow: 1;
+    padding: 1rem;
+    background-color: #aa3baf;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+
+.flex-container {
+    display: flex;
+    gap: 55px;
+}
+
+.post_container {
+    width: 30%;
+    height: 200px;
+    background-color: #ffffff;
+    padding: 1rem;
+    margin-left: 30px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.community-container {
+    width: 900px;
+    flex-grow: 1;
+    background-color: #fff;
+    padding: 1rem;
+    margin-right: 100px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-border-dark {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header a {
+    text-decoration: none;
+    color: #7f1cf8;
+}
+
+.card-text {
+    margin: 1rem 0;
+}
+
+.card-text img {
+    max-width: 100%;
+    height: auto;
+}
+
+.like-button {
+    background: none;
+    border: none;
+    color: #007BFF;
+    cursor: pointer;
+}
+
+.like-button i {
+    font-size: 1.2rem;
+}
+
+input.form-control, textarea.form-control {
+    width: 80%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.post-button {
+    font-family: 'BoogieBoys'; /* Ensures the font is 'BoogieBoys' */
+    font-size: 20px; /* Sets the font size */
+    border: 1px solid #007BFF; /* Adds a border with color */
+    border-radius: 4px; /* Rounds the corners of the button */
+    padding: 8px; /* Adds padding inside the button */
+    padding-bottom: 0px;
+    display: inline-block; /* Displays the button as an inline block */
+    color: #007BFF; /* Sets the text color */
+    background-color: #f8f9fa; /* Sets the background color */
+    text-align: center; /* Centers the text inside the button */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+}
+
+.post-button:hover {
+    background-color: #007BFF; /* Changes background color on hover */
+    color: white; /* Changes text color on hover */
+    border-color: #0056b3; /* Changes border color on hover */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.btn-group .dropdown-item {
+    font-size: 20px;
+    border: 1px solid #007BFF; 
+    border-radius: 4px; 
+    padding: 5px; 
+    display: inline-block; 
+    color: #007BFF; 
+    background-color: #f8f9fa; 
+}
+
+.btn-group .dropdown-item:hover {
+    background-color: #007BFF; 
+    color: white; /* Change text color on hover */
+    border-color: #0056b3; /* Change border color on hover */
+}
+
+/* Styles for the comment button to match the Delete button */
+.comment-button {
+    font-family: 'BoogieBoys'; /* Ensures the font is 'BoogieBoys' */
+    font-size: 20px; /* Sets the font size */
+    border: 1px solid #007BFF; /* Adds a border with color */
+    border-radius: 4px; /* Rounds the corners of the button */
+    padding: 5px; /* Adds padding inside the button */
+    padding-bottom: 0px;
+    display: inline-block; /* Displays the button as an inline block */
+    color: #007BFF; /* Sets the text color */
+    background-color: #f8f9fa; /* Sets the background color */
+    text-align: center; /* Centers the text inside the button */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+}
+
+/* Hover effect for the comment button to match the Delete button */
+.comment-button:hover {
+    background-color: #007BFF; /* Changes background color on hover */
+    color: white; /* Changes text color on hover */
+    border-color: #0056b3; /* Changes border color on hover */
+}
+
+/* Container for each comment to align text and delete button */
+.comment-container {
+    display: flex; /* Use flexbox to align items */
+    justify-content: space-evenly; /* Align items to be spaced apart */
+    align-items: center; /* Vertically center items */
+    margin-bottom: 10px; /* Space between comments */
+}
+
+/* Style for the delete comment button */
+.delete-comment-button {
+    font-size: 20px; /* Adjust font size as needed */
+    border: 1px solid #dc3545; /* Red border to indicate danger */
+    border-radius: 4px; /* Rounded corners */
+    padding: 5px; /* Padding inside the button */
+    padding-bottom: 0px;
+    color: #dc3545; /* Text color matching border */
+    background-color: #f8f9fa; /* Background color */
+    cursor: pointer; /* Pointer cursor to indicate it's clickable */
+    text-decoration: none; /* Remove underline if it's a link */
+}
+
+/* Hover effect for the delete comment button */
+.delete-comment-button:hover {
+    background-color: #dc3545; /* Red background on hover */
+    color: white; /* White text on hover */
+    border-color: #c82333; /* Darker red border on hover */
+}
+
+/* Style for the current user's comment */
+.comment-container.current-user {
+    background-color: #f0f0f0; /* Background color for current user's comment */
+}
+
+/* Style for the comment text */
+.comment-text {
+    color: #333333; /* Default color for comment text */
+}
+
+/* Style for the current user's username */
+.comment-user {
+    color:#308bc7
+}
+
