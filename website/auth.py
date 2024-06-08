@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, redirect, url_for, request, jsonify, flash
+from flask import Blueprint, render_template, redirect, url_for, request, jsonify, flash
 from . import db 
 from flask import session
 from .models import User, Result, Post
@@ -47,17 +47,17 @@ def signup():
       elif len(password1) < 5:
          return jsonify({'success': False, 'message': 'Password is too short.'})
       else:
-         test_result = session.pop('test_result', None)
-         # Delete user's result in session after they sign up
+         new_user = User(email=email, username=username, password=generate_password_hash(password1, method='pbkdf2:sha256'))
+         db.session.add(new_user)
+         db.session.commit()
 
+         # Delete user's result in session after they sign up
+         test_result = session.pop('result', None)
          if test_result:
              new_result = Result(result_data=test_result, user=new_user) # Save user's result in database
              db.session.add(new_result)
              db.session.commit()
-
-         new_user = User(email=email, username=username, password=generate_password_hash(password1, method='pbkdf2:sha256'))
-         db.session.add(new_user)
-         db.session.commit()
+    
          login_user(new_user, remember=True)
          return jsonify({'success': True, 'message': 'User created!'})
 
@@ -111,10 +111,10 @@ def test_result():
             if previous_result:
                 related_posts = Post.query.filter_by(visual_type=previous_result).all()
         
-        return render_template('views.test_result.html', visual_type=visual_type, previous_result=previous_result, related_posts=related_posts)
+        return render_template('test_result.html',  user=current_user, visual_type=visual_type, previous_result=previous_result, related_posts=related_posts)
         
     # Render a template with the result
-    return render_template('views.test_result.html', user=current_user)
+    return render_template('test_result.html')
 
 @auth.route('/previous_result', methods=['GET']) 
 @login_required
@@ -123,7 +123,7 @@ def previous_result():
     related_posts = []
     if previous_result:
         related_posts = Post.query.filter_by(visual_type=previous_result).all()
-    return render_template('test_result.html', previous_result=previous_result, related_posts=related_posts)
+    return render_template('test_result.html',  user=current_user, previous_result=previous_result, related_posts=related_posts)
 
 @auth.route("/logout")
 @login_required
