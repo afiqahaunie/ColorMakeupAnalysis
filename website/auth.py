@@ -116,23 +116,14 @@ def test_result():
     # Render a template with the result
     return render_template('views.test_result.html', user=current_user)
 
-@auth.route('/previous_result/<username>', methods=['GET']) 
+@auth.route('/previous_result', methods=['GET']) 
 @login_required
-def previous_result(username):
-    user = User.query.filter_by(username=username).first()
-    if user:
-        previous_result = user.result.result_data if user.result else None
-        # Fetch result from database and display user's previous result of the test
-
-        related_posts =[]
-        if previous_result:
-            related_posts = Post.query.filter_by(visual_type=previous_result).all()
-            # Display related post from community based on user's visual type
-
-        return render_template('views.test_result.html', previous_result=previous_result, related_posts=related_posts)
-    else:
-        flash('User not found', category='error')
-        return redirect(url_for('views.home'))
+def previous_result():
+    previous_result = current_user.result.result_data if current_user.result else None
+    related_posts = []
+    if previous_result:
+        related_posts = Post.query.filter_by(visual_type=previous_result).all()
+    return render_template('test_result.html', previous_result=previous_result, related_posts=related_posts)
 
 @auth.route("/logout")
 @login_required
