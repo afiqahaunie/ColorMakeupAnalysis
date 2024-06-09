@@ -8,7 +8,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
     posts = db.relationship('Post', backref='user', passive_deletes=True)
-    result = db.relationship('Result', backref='user_result', uselist=False)
+    result = db.relationship('Result', backref='user_result')
     coloranalysis = db.relationship('ColorAnalysis', backref='user_pallete')
 
 class Post(db.Model):
