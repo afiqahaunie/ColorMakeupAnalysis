@@ -66,7 +66,7 @@ def create_post():
         else:
             visual_type = None
             if current_user.result:
-                visual_type = current_user.result.result_data 
+                visual_type = current_user.result.result_data # Relate the post with user's result of makeup test
 
             filename = None
             if photo and allowed_file(photo.filename):
