@@ -32,9 +32,9 @@
                                 <span class="like-count" id="like-count-{{ post.id }}">{{ post.likes|length }}</span>
                                 <button class="like-button" id="like-button-{{ post.id }}" onclick="like('{{ post.id }}')">
                                     {% if current_user.id in liked_post_ids %}
-                                        <i class="fas fa-thumbs-up"></i>
+                                        <i class="material-symbols-outlined">thumb_up</i>
                                     {% else %}
-                                        <i class="far fa-thumbs-up"></i>
+                                        <i class="material-symbols-outlined">thumb_up</i>
                                     {% endif %}
                                 </button>
                                 {% if user.id == post.author %}
