@@ -129,7 +129,8 @@ def test_result():
 @auth.route('/previous_result', methods=['GET']) 
 @login_required
 def previous_result():
-    previous_result = current_user.result.result_data if current_user.result else None
+    latest_result = Result.query.filter_by(user_id=current_user.id).order_by(Result.id.desc()).first()
+    previous_result = latest_result.result_data if latest_result else None
     related_posts = []
     if previous_result:
         related_posts = Post.query.filter_by(visual_type=previous_result).all()
