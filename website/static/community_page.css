@@ -8,6 +8,12 @@
     src: url("/static/fonts/BoogieBoys.ttf") format("opentype");
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 /* Apply the font to the entire body */
 body {
     font-family: 'BoogieBoys';
@@ -19,30 +25,27 @@ body {
 
 /* Ensure the font is applied to specific elements */
 .box-post h1, .community-container h1 {
-    font-family: 'Kaoly'; /* Add this line */
+    font-family: 'Kaoly'; /* Use 'Kaoly' font for headings */
     margin-top: 0;
     color: rgb(217, 23, 107);
 }
 
-/* Additional CSS styles as per previous code */
-header {
-    background-color:#333;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-}
-
+/* Flex container for overall layout */
 .container-community {
     display: flex;
-    margin: 20px;
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: center; /* Center items horizontally */
+    align-items: flex-start; /* Align items at the start vertically */
+    margin: 20px auto; /* Center the container with auto margin */
+    max-width: 1200px; /* Maximum width for large screens */
+    padding: 0 15px; /* Padding for smaller screens */
 }
 
+/* Sidebar styling */
 .sidebar {
-    width: 200px;
-    background-color: #fff;
-    border-right: 1px solid #ddd;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Full width for smaller screens */
+    max-width: 200px; /* Maximum width for larger screens */
+    margin-bottom: 20px; /* Space below the sidebar */
 }
 
 .sidebar nav ul {
@@ -64,40 +67,67 @@ header {
     color: #007BFF;
 }
 
-/* .content {
-    flex-grow: 1;
-    padding: 1rem;
-    background-color: #aa3baf;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-} */
-
+/* Flex container for post elements */
 .flex-container {
     display: flex;
-    gap: 55px;
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 20px; /* Gap between items */
+    justify-content: center; /* Center items */
+    width: 100%;
 }
 
+/* Post container styles */
 .post_container {
-    width: 30%;
-    height: 200px;
+    width: 100%; /* Full width for smaller screens */
     background-color: #ffffff;
-    padding: 1rem;
-    margin-left: 30px;
+    max-width: 400px; /* Maximum width for larger screens */
+    margin: 10px; /* Adjust margin */
     border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Community container styles */
 .community-container {
-    width: 900px;
-    flex-grow: 1;
+    flex-grow: 1; /* Allow this container to grow */
     background-color: #fff;
-    padding: 1rem;
-    margin-right: 100px;
+    margin: 20px auto; /* Center with auto margin */
+    padding: 15px;
     border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Styles for larger screens */
+@media (min-width: 768px) {
+    .container-community {
+        justify-content: space-between; /* Space items apart evenly */
+    }
+
+    .sidebar {
+        width: 20%; /* Sidebar width as a percentage */
+    }
+
+    .community-container, .post_container {
+        width: 75%; /* Width for both containers to align */
+        max-width: 75%; /* Ensure max-width is consistent */
+    }
+
+    /* Flex grow to ensure containers take available space proportionately */
+    .community-container, .post_container {
+        flex-grow: 1; /* Allow these containers to grow */
+    }
+}
+
+/* Full width for smaller screens */
+@media (max-width: 768px) {
+    .post_container, .community-container, .sidebar {
+        width: 100%; /* Full width for smaller screens */
+        max-width: none; /* Remove max width constraint */
+    }
+}
+
+/* Additional styling for specific elements */
 .card-border-dark {
     border: 1px solid #ddd;
     border-radius: 4px;
