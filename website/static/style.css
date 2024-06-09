@@ -321,3 +321,12 @@ p{
     padding: 50px;
     background-color: aliceblue;
 }
+
+.recommendation{
+    width: 600px;
+    position: relative;
+    margin: auto;
+    text-align: center;
+    padding: 50px;
+    background-color: pink;
+}

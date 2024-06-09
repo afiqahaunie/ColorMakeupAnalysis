@@ -1,9 +1,8 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, current_app
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, current_app, session
 from flask_login import login_required, current_user
-from .models import User,Post, Upload, Comment, Like, Upload
+from .models import User,Post, Upload, Comment, Like, ColorAnalysis
 from . import db
 from werkzeug.utils import secure_filename
-from colorsys import hls_to_rgb
 import os
 
 views = Blueprint("views", __name__)
@@ -206,7 +205,7 @@ def color():
 @views.route("/display_image", methods=['GET','POST'])
 def display_image():
     image = Upload.query.order_by(Upload.id.desc()).first()
-    return render_template('display_image.html', image=[image])
+    return render_template('display_image.html', image=[image], user=current_user)
 
 #COLOR ANALYSIS
 @views.route("/results", methods=['GET', 'POST'])
@@ -226,13 +225,32 @@ def results():
         image.hair_color = hair_color
         image.skin_color = skin_color
         image.eye_color = eye_color
-        image.seasonal_palette = seasonal_palette
         db.session.commit()
 
+        # Save user's result in session if they are not signed up yet
+        session['coloranalysis'] = seasonal_palette
+
+        previous_seasonal_palette = session.get('coloranalysis')
+
+        if current_user.is_authenticated:
+                new_analysis = ColorAnalysis(seasonal_palette=seasonal_palette, user=current_user)
+                db.session.add(new_analysis)
+                db.session.commit()
+
+                if current_user.palette:
+                    previous_seasonal_palette = current_user.palette[-1].seasonal_palette
+
         # Redirect to results page with seasonal_palette as a query parameter
-        return redirect(url_for('views.show_results', seasonal_palette=seasonal_palette))
+        return redirect(url_for('views.show_results', user=current_user, seasonal_palette=seasonal_palette, previous_seasonal_palette=previous_seasonal_palette))
 
     return render_template('results.html')
+
+@views.route('/previous_seasonal_palette', methods=['GET'])
+@login_required
+def previous_seasonal_palette():
+    previous_seasonal_palette = current_user.coloranalysis[-1].seasonal_palette if current_user.coloranalysis else None  
+    
+    return render_template('results.html', seasonal_palette=previous_seasonal_palette, user=current_user)
 
 def analyze_colors(hair_color, skin_color, eye_color):
     undertone = determine_undertone(skin_color)
@@ -362,4 +380,4 @@ def show_results():
     seasonal_palette = request.args.get('seasonal_palette')
 
     # Render the template with the seasonal_palette
-    return render_template('results.html', seasonal_palette=seasonal_palette)
+    return render_template('results.html', seasonal_palette=seasonal_palette, user=current_user)
