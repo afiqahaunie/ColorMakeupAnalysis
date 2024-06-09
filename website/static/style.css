@@ -328,5 +328,16 @@ p{
     margin-right: auto;
     max-width: 500px;
     text-align: center;
-    background: aliceblue;
+    background-color: aliceblue;
+}
+
+.recommendation{
+    padding: 20px;
+    border: 20px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    text-align: center;
+    background-color: pink;
 }

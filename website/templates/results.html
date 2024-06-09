@@ -2,27 +2,37 @@
 {% block title %}Results{% endblock %}
 {% block content %}
 
-<div class="color-palette">
-<h2>Color Analysis Results</h2>
-{% if seasonal_palette == "Winter" %}
-    <h3> Your seasonal palette is winter!</h3>
-    <img src="static/winter.png" alt="Winter" width="500" height="600">
-{% elif seasonal_palette == "Light Spring" %}
-    <h3> Your seasonal palette is light spring!</h3>
-    <img src="static/light spring.png" alt="Light Spring" width="500" height="600">
-{% elif seasonal_palette == "Summer" %}
-    <h3> Your seasonal palette is summer!</h3>
-    <img src="static/summer.png" alt="Summer" width="500" height="600">
-{% elif seasonal_palette == "Autumn" %}
-    <h3> Your seasonal palette is autumn!</h3>
-    <img src="static/autumn.png" alt="Autumn" width="500" height="600">
-{% elif seasonal_palette == "Soft Autumn" %}
-    <h3> Your seasonal palette is soft autumn!</h3>
-    <img src="static/soft autumn.jpg" alt="Soft Autumn" width="500" height="600">
-{% elif seasonal_palette == "Soft Summer" %}
-    <h3> Your seasonal palette is soft summer!</h3>
-    <img src="static/soft summer.png" alt="Soft Summer" width="500" height="600">
-{% endif %}
-</div>
-
+<section class="result">
+    {% if seasonal_palette %} 
+        <h1>Color Analysis Result</h1>
+    {% elif previous_result %}
+        <h2>Your previous result is...</h2>
+    {% endif %}
+    <div class="color-palette">
+        {% if seasonal_palette == "Winter" %}
+            <h3> Your seasonal palette is winter!</h3>
+            <img src="static/images_coloranalysis/winter.png" alt="Winter" width="500" height="600">
+        {% elif seasonal_palette == "Light Spring" %}
+            <h3> Your seasonal palette is light spring!</h3>
+            <img src="static/images_coloranalysis/light spring.png" alt="Light Spring" width="500" height="600">
+        {% elif seasonal_palette == "Summer" %}
+            <h3> Your seasonal palette is summer!</h3>
+            <img src="static/images_coloranalysis/summer.png" alt="Summer" width="500" height="600">
+        {% elif seasonal_palette == "Autumn" %}
+            <h3> Your seasonal palette is autumn!</h3>
+            <img src="static/images_coloranalysis/autumn.png" alt="Autumn" width="500" height="600">
+        {% elif seasonal_palette == "Soft Autumn" %}
+            <h3> Your seasonal palette is soft autumn!</h3>
+            <img src="static/images_coloranalysis/soft autumn.png" alt="Soft Autumn" width="500" height="600">
+        {% elif seasonal_palette == "Soft Summer" %}
+            <h3> Your seasonal palette is soft summer!</h3>
+            <img src="static/images_coloranalysis/soft summer.png" alt="Soft Summer" width="500" height="600">
+        {% endif %}
+    </div>
+    <div class="recommendation">
+        {% if not current_user.is_authenticated %}
+            <h3>Save this result and join our community by <a href="/signup">signing up</a> right now!</h3>
+        {% endif %}
+      </div>
+</section>
 {% endblock %}
