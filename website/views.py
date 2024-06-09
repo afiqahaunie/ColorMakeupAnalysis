@@ -54,23 +54,6 @@ def login():
 def signup():
     return render_template("signup.html")
 
-@views.route("/post_page")
-def post_page():
-    posts = Post.query.all()
-    return render_template("post_page.html", posts=posts)
-
-@views.route("/posts.comment/<username>")
-@login_required
-def posts(username):
-    user = User.query.filter_by(username=username).first()
-
-    if not user:
-        flash('No user with that username exists.', category='error')
-        return redirect(url_for('views.community'))
-    
-    posts = user.posts
-    return render_template("community_page.html", user=current_user, posts=posts, username=username)
-
 @views.route("/community_page", methods=['GET', 'POST'])
 @login_required
 def create_post():
@@ -78,13 +61,12 @@ def create_post():
         text = request.form.get('text')
         photo = request.files.get('photo')
 
-        if not text:
-            flash('Post cannot be empty', category='error')
+        if not text and (not photo or photo.filename == ''):
+            flash('Post cannot be empty. Please provide text or a photo.', category='error')
         else:
             visual_type = None
             if current_user.result:
-                latest_result = current_user.results[-1]
-                visual_type = latest_result.result_data if latest_result else None # Relate the post with user's result of makeup test
+                visual_type = current_user.result.result_data 
 
             filename = None
             if photo and allowed_file(photo.filename):
@@ -95,12 +77,14 @@ def create_post():
                 flash('Invalid file type', category='error')
                 return redirect(request.url)
             
-            post = Post(text=text, author=current_user.id, photo=filename, visual_type=visual_type)
-            
-            db.session.add(post)
-            db.session.commit()
-            flash('Post created!', category='success')
-            return redirect(url_for('views.community'))  # Redirect to the community page after successfully creating the post
+             # Only create the post if text is provided or photo is successfully uploaded
+            if text or filename:
+                post = Post(text=text, author=current_user.id, photo=filename, visual_type=visual_type)
+                
+                db.session.add(post)
+                db.session.commit()
+                flash('Post created!', category='success')
+                return redirect(url_for('views.community'))  # Redirect to the community page after successfully creating the post
 
     # Fetch posts to display on the page
     posts = Post.query.order_by(Post.date.desc()).all()
@@ -112,11 +96,10 @@ def delete_post(id):
     post = Post.query.get_or_404(id)
 
     if current_user != post.user:
-        flash("You do not have permission to delete this post.", category='error')
+        pass  # Handle unauthorized access if needed
     else:
         db.session.delete(post)
         db.session.commit()
-        flash('Post deleted.', category='success')
 
     return redirect(url_for('views.community'))
 
@@ -126,16 +109,15 @@ def create_comment(post_id):
     text = request.form.get('text')
 
     if not text:
-        flash('Comment cannot be empty.', category='error')
+        pass  # Handle empty comment case (could log or take some other action)
     else:
         post = Post.query.filter_by(id=post_id).first()
         if post:
             comment = Comment(text=text, author=current_user.id, post_id=post_id)  # Use current_user.id
             db.session.add(comment)
             db.session.commit()
-            flash('Comment created!', category='success')
         else:
-            flash('Post does not exist.', category='error')
+            pass  # Handle non-existent post case (could log or take some other action)
 
     return redirect(url_for('views.community'))
 
@@ -145,9 +127,9 @@ def delete_comment(comment_id):
     comment = Comment.query.filter_by(id=comment_id).first()
 
     if not comment:
-        flash('Comment does not exist.', category='error')
+        pass  
     elif current_user.id != comment.author and current_user.id != comment.post.author:
-        flash('You do not have permission to delete this comment.', category='error')
+        pass  
     else:
         db.session.delete(comment)
         db.session.commit()
@@ -162,8 +144,10 @@ def like(post_id):
     like = Like.query.filter_by(author=current_user.id, post_id=post_id).first()
 
     if not post:
-        return jsonify({'error': 'Post does not exist.'}, 400)
-    elif like:
+        # No error message returned, only an empty response with a 400 status code
+        return '', 400
+
+    if like:
         db.session.delete(like)
         db.session.commit()
     else:
