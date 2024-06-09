@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, jsonify
 from . import db 
 from flask import session
-from .models import User, Result, Post
+from .models import User, Result, Post, ColorAnalysis
 from flask_login import login_user, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -27,39 +27,49 @@ def login():
 
 @auth.route("/signup", methods=['POST'])
 def signup():
-    if request.method == 'POST':
-      email = request.form.get("email")
-      username = request.form.get("username")
-      password1 = request.form.get("password1")
-      password2 = request.form.get("password2")
+    
+    email = request.form.get("email")
+    username = request.form.get("username")
+    password1 = request.form.get("password1")
+    password2 = request.form.get("password2")
 
-      email_exists = User.query.filter_by(email=email).first()
-      username_exists = User.query.filter_by(username=username).first()
+    if not all([email, username, password1, password2]):
+        return jsonify({'success': False, 'message': 'Please fill in all fields.'})
+    
+    email_exists = User.query.filter_by(email=email).first()
+    username_exists = User.query.filter_by(username=username).first()
 
-      if email_exists:
-         return jsonify({'success': False, 'message': 'Email is already used.'})
-      elif username_exists:
-         return jsonify({'success': False, 'message': 'Username is already used.'})
-      elif password1 != password2: 
-         return jsonify({'success': False, 'message': 'Passwords don\'t match. Please write again.'})
-      elif len(username) < 2:
-         return jsonify({'success': False, 'message': 'Username is too short.'})
-      elif len(password1) < 5:
-         return jsonify({'success': False, 'message': 'Password is too short.'})
-      else:
-         new_user = User(email=email, username=username, password=generate_password_hash(password1, method='pbkdf2:sha256'))
-         db.session.add(new_user)
-         db.session.commit()
+    if email_exists:
+        return jsonify({'success': False, 'message': 'Email is already used.'})
+    elif username_exists:
+        return jsonify({'success': False, 'message': 'Username is already used.'})
+    elif password1 != password2: 
+        return jsonify({'success': False, 'message': 'Passwords don\'t match. Please write again.'})
+    elif len(username) < 2:
+        return jsonify({'success': False, 'message': 'Username is too short.'})
+    elif len(password1) < 5:
+        return jsonify({'success': False, 'message': 'Password is too short.'})
+    else:
+        new_user = User(email=email, username=username, password=generate_password_hash(password1, method='pbkdf2:sha256'))
+        db.session.add(new_user)
+        db.session.commit()
 
-         # Delete user's result in session after they sign up
-         test_result = session.pop('result', None)
-         if test_result:
+        # Delete user's result in session after they sign up
+        test_result = session.pop('result', None)
+        seasonal_palette = session.pop('coloranalysis', None)
+        
+        if test_result:
              new_result = Result(result_data=test_result, user=new_user) # Save user's result in database
              db.session.add(new_result)
              db.session.commit()
+
+        if seasonal_palette:
+             new_analysis = ColorAnalysis(seasonal_palette=seasonal_palette, user=new_user) # Save user's result in database
+             db.session.add(new_analysis)
+             db.session.commit()
     
-         login_user(new_user, remember=True)
-         return jsonify({'success': True, 'message': 'User created!'})
+        login_user(new_user, remember=True)
+        return jsonify({'success': True, 'message': 'User created!'})
 
 @auth.route("/login", methods=['GET'])
 def login_page():

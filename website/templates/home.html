@@ -8,6 +8,9 @@
                <h2>COLOR</h2>
                <h3>Unlock Your True Colors!</h3>
                <p>At our service, we dive deep into the different of tones and shades to unveil your personal pallete. This is your chance to start styling outfits with the true colour pallete. Dont miss out the chance!</p>
+                {% if current_user.is_authenticated and current_user.coloranalysis %}
+                    <p>See your previous seasonal palette <a href="{{url_for('views.previous_seasonal_palette')}}">here.</a></p> <!-- Direct to result page -->
+                {% endif %}
                <a href="color" class="try-button">Try now!</a> <!-- Direct to color test page -->
            </div>
            <div class="segment-desc">

@@ -9,6 +9,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150), nullable=False)
     posts = db.relationship('Post', backref='user', passive_deletes=True)
     result = db.relationship('Result', backref='user_result')
+    coloranalysis = db.relationship('ColorAnalysis', backref='user_pallete')
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -39,10 +40,15 @@ class Upload(db.Model):
     hair_color = db.Column(db.String(7))  # Assuming hexadecimal color representation, e.g., "#RRGGBB"
     skin_color = db.Column(db.String(7))
     eye_color = db.Column(db.String(7))
-    seasonal_palette = db.Column(db.String(255))
      
 class Result(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     result_data = db.Column(db.String(255))
     user_id = db.Column(db.Integer, db. ForeignKey('user.id'))
     user = db.relationship('User', backref='results')
+
+class ColorAnalysis(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    seasonal_palette = db.Column(db.String(255))
+    user_id = db.Column(db.Integer, db. ForeignKey('user.id'))
+    user = db.relationship('User', backref='palette')
