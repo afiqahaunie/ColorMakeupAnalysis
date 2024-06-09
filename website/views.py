@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, current_app, session
 from flask_login import login_required, current_user
-from .models import User,Post, Upload, Comment, Like, ColorAnalysis
+from .models import User,Post, Upload, Comment, Like, ColorAnalysis, Result
 from . import db
 from werkzeug.utils import secure_filename
 import os
@@ -32,7 +32,8 @@ def community():
     posts = Post.query.all()
     
     if current_user.is_authenticated:
-        visual_type = current_user.result.result_data if current_user.result else None # Fetch user's result from result table
+        latest_result = Result.query.filter_by(user_id=current_user.id).order_by(Result.id.desc()).first()
+        visual_type = latest_result.result_data if latest_result else None # Fetch user's latest result from result table
         if visual_type:
             related_posts = Post.query.filter_by(visual_type=visual_type).all() # Relate the post with user's result of makeup test
         else:
@@ -82,7 +83,8 @@ def create_post():
         else:
             visual_type = None
             if current_user.result:
-                visual_type = current_user.result.result_data # Relate the post with user's result of makeup test
+                latest_result = current_user.results[-1]
+                visual_type = latest_result.result_data if latest_result else None # Relate the post with user's result of makeup test
 
             filename = None
             if photo and allowed_file(photo.filename):
