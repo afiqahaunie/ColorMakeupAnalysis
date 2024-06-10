@@ -4,8 +4,17 @@ from .models import User,Post, Upload, Comment, Like, ColorAnalysis, Result
 from . import db
 from werkzeug.utils import secure_filename
 import os
+from functools import wraps
 
 views = Blueprint("views", __name__)
+
+def custom_login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not current_user.is_authenticated:
+            return redirect(url_for('views.login'))  # Redirect to the login page without flashing a message
+        return f(*args, **kwargs)
+    return decorated_function
 
 @views.route("/")
 @views.route("/home")
@@ -55,7 +64,7 @@ def signup():
     return render_template("signup.html")
 
 @views.route("/community_page", methods=['GET', 'POST'])
-@login_required
+@custom_login_required
 def create_post():
     if request.method == "POST":
         text = request.form.get('text')
@@ -102,7 +111,7 @@ def delete_post(id):
     return redirect(url_for('views.community'))
 
 @views.route("/create-comment/<int:post_id>", methods=['POST'])
-@login_required
+@custom_login_required
 def create_comment(post_id):
     text = request.form.get('text')
 
