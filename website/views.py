@@ -62,7 +62,7 @@ def create_post():
         photo = request.files.get('photo')
 
         if not text and (not photo or photo.filename == ''):
-            flash('Post cannot be empty. Please provide text or a photo.', category='error')
+            return jsonify({'success': False, 'message': 'Post cannot be empty. Please provide text or photo.'})
         else:
             visual_type = None
             if current_user.result:
@@ -74,8 +74,7 @@ def create_post():
                 filename = secure_filename(photo.filename)
                 photo.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
             elif photo and not allowed_file(photo.filename):
-                flash('Invalid file type', category='error')
-                return redirect(request.url)
+                return jsonify({'success': False, 'message': 'Invalid file type'})
             
              # Only create the post if text is provided or photo is successfully uploaded
             if text or filename:
@@ -83,8 +82,7 @@ def create_post():
                 
                 db.session.add(post)
                 db.session.commit()
-                flash('Post created!', category='success')
-                return redirect(url_for('views.community'))  # Redirect to the community page after successfully creating the post
+                return jsonify({'success': True, 'message': 'Post created successfully'})  # Redirect to the community page after successfully creating the post
 
     # Fetch posts to display on the page
     posts = Post.query.order_by(Post.date.desc()).all()

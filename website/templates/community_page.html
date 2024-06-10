@@ -13,7 +13,7 @@
                 <div class="post_container">
                     <div class="box-post">
                         <h1 align="center">Make a post</h1>
-                        <form method="POST" action="{{ url_for('views.create_post') }}" enctype="multipart/form-data">
+                        <form id="post-form" method="POST" action="{{ url_for('views.create_post') }}" enctype="multipart/form-data">
                             <textarea name="text" id="text" class="form-control"></textarea>
                             <br />
                             <input type="file" name="photo" accept="image/*">
@@ -83,4 +83,26 @@
         </main>
     </div>
 </section>
+<script>
+    const url = "{{ url_for('views.create_post') }}";
+    document.getElementById('post-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        fetch(url, {
+            method: 'POST',
+            body: new FormData(this)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                window.location.href = "{{ url_for('views.community') }}";
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
 {% endblock %}
