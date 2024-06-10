@@ -8,6 +8,10 @@
     src: url("/static/fonts/BoogieBoys.ttf") format("opentype");
 }
 
+.container{
+    background: linear-gradient(rgb(238, 194, 194), rgb(177, 105, 233))
+}
+
 *,
 *::before,
 *::after {
@@ -313,4 +317,10 @@ footer {
 
 .toggle-comments-button:hover {
     background-color: #0491a7;
+}
+
+.h7 {
+    font-size: 1.25rem; /* Adjust the size if needed */
+    font-weight: normal; /* Set the font weight if needed */
+    color: #333; /* Ensure a standard color */
 }
