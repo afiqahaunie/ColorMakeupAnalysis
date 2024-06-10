@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, current_app, session
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify, current_app, session
 from flask_login import login_required, current_user
 from .models import User,Post, Upload, Comment, Like, ColorAnalysis, Result
 from . import db
@@ -19,17 +19,6 @@ def custom_login_required(f):
 @views.route("/")
 @views.route("/home")
 def home():
-    if request.method =="POST":
-        text = request.form.get('text')
-
-        if not text:
-            flash('Post cannot be empty', category='error')
-        else:
-            post = Post(text=text, author=current_user.id)
-            db.session.add(post)
-            db.session.commit()
-            flash('Post created!', category='success')
-
     return render_template("home.html", user=current_user)
 
 @views.route('/makeup')
@@ -75,7 +64,8 @@ def create_post():
         else:
             visual_type = None
             if current_user.result:
-                visual_type = current_user.result.result_data # Relate the post with user's result of makeup test
+                latest_result = current_user.results[-1]
+                visual_type = latest_result.result_data if latest_result else None # Relate the post with user's result of makeup test
 
             filename = None
             if photo and allowed_file(photo.filename):
@@ -140,7 +130,6 @@ def delete_comment(comment_id):
     else:
         db.session.delete(comment)
         db.session.commit()
-        flash('Comment deleted.', category='success')
 
     return redirect(url_for('views.community'))
 
