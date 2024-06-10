@@ -9,81 +9,85 @@
         <div class="sidebar">
             <!-- Sidebar content -->
         </div>
-            <div class="flex-container">
-                <div class="post_container">
-                    <div class="box-post">
-                        <h1 align="center">Make a post</h1>
-                        <form id="post-form" method="POST" action="{{ url_for('views.create_post') }}" enctype="multipart/form-data">
-                            <textarea name="text" id="text" class="form-control"></textarea>
-                            <br />
-                            <input type="file" name="photo" accept="image/*">
-                            <br />
-                            <div align="center">
-                                <button type="submit" class="post-button">Post</button>
-                            </div>
-                            <p>Log in <a href="{{url_for('auth.signup')}}">here</a> to start posting now!</p>
-                        </form>
-                    </div>
-                </div>
-                <div class="community-container">
-                    <h1 align="center">Community Posts</h1>
-                    {% for post in posts %}
-                    <div class="card-border-dark">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <a i="/posts/{{ post.user.username }}">{{ post.user.username }}</a>
-                            <div>
-                                <span class="like-count" id="like-count-{{ post.id }}">{{ post.likes|length }}</span>
-                                <button class="like-button" id="like-button-{{ post.id }}" onclick="like('{{ post.id }}')">
-                                    {% if current_user.id in liked_post_ids %}
-                                        <i class="material-symbols-outlined">thumb_up</i>
-                                    {% else %}
-                                        <i class="material-symbols-outlined">thumb_up</i>
-                                    {% endif %}
-                                </button>
-                                {% if user.id == post.author %}
-                                <div class="btn-group">
-                                    <ul class="dropdown-menu">
-                                        <a href="{{ url_for('views.delete_post', id=post.id) }}" class="dropdown-item">Delete</a>
-                                    </ul>
-                                </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="card-text">{{ post.text }}</div>
-                        {% if post.photo %}
-                        <img src="{{ url_for('static', filename='uploads/' + post.photo) }}" alt="Photo" width="350" height="300">
-                        {% endif %}
+        <div class="flex-container">
+            <div class="post_container">
+                <div class="box-post">
+                    <h1 align="center">Make a post</h1>
+                    <form method="POST" action="{{ url_for('views.create_post') }}" enctype="multipart/form-data">
+                        <textarea name="text" id="text" class="form-control"></textarea>
                         <br />
-                        <div class="collapse" id="comments-{{ post.id }}">
-                            <div class="card">
-                                <div class="card-body" id="comments-expanded-{{ post.id }}">
-                                    {% for comment in post.comments %}
-                                    <!-- Modify the comment container to include a class for the current user -->
-                                    <div class="comment-container{% if comment.author == current_user %} current-user{% endif %}">
-                                        <div>
-                                            <a i="/posts/{{ post.user.username }}" class="comment-user">{{ comment.author_username.username }}</a>: 
-                                            <span class="comment-text{% if comment.author == current_user %} current-user{% endif %}">{{ comment.text }}</span>
-                                        </div>
-                                        {% if user.id == comment.author or user.id == post.author %}
-                                        <a href="{{ url_for('views.delete_comment', comment_id=comment.id) }}" class="delete-comment-button">Delete</a>
-                                        {% endif %}
-                                    </div>                                    
-                                    {% endfor %}
-                                </div>
-                            </div>
+                        <input type="file" name="photo" accept="image/*">
+                        <br />
+                        <div align="center">
+                            <button type="submit" class="post-button">Post</button>
                         </div>
-                        <!-- Updated HTML for the comment button -->
-                        <form class="input-group mb-3" method='POST' action="{{ url_for('views.create_comment', post_id=post.id) }}">
-                            <input type="text" name="text" class="form-control" placeholder="Comment something!" />
-                            <button type="submit" class="comment-button">Comment</button>
-                        </form>
-                    </div>
-                    {% endfor %}
+                        <p>Log in <a href="{{url_for('auth.signup')}}">here</a> to start posting now!</p>
+                    </form>
                 </div>
             </div>
-        </main>
+            <div class="community-container">
+                <h1 align="center">Community Posts</h1>
+                {% for post in posts %}
+                <div class="card-border-dark">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <a href="/posts/{{ post.user.username }}">{{ post.user.username }}</a>
+                        <div>
+                            <span class="like-count" id="like-count-{{ post.id }}">{{ post.likes|length }}</span>
+                            <button class="like-button" id="like-button-{{ post.id }}" onclick="like('{{ post.id }}')">
+                                {% if current_user.id in liked_post_ids %}
+                                    <i class="material-symbols-outlined">thumb_up</i>
+                                {% else %}
+                                    <i class="material-symbols-outlined">thumb_up</i>
+                                {% endif %}
+                            </button>
+                            {% if user.id == post.author %}
+                            <div class="btn-group">
+                                <ul class="dropdown-menu">
+                                    <a href="{{ url_for('views.delete_post', id=post.id) }}" class="dropdown-item">Delete</a>
+                                </ul>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-text">{{ post.text }}</div>
+                    {% if post.photo %}
+                    <img src="{{ url_for('static', filename='uploads/' + post.photo) }}" alt="Photo" width="350" height="300">
+                    {% endif %}
+                    <br />
+
+                    <!-- Toggle button to show/hide comments -->
+                    <button class="toggle-comments-button" onclick="toggleComments('{{ post.id }}')">Read Comments</button>
+                    
+                    <!-- Comment section with initial display set to none -->
+                    <div class="collapse comments-section" id="comments-{{ post.id }}" style="display: none;">
+                        <div class="card">
+                            <div class="card-body" id="comments-expanded-{{ post.id }}">
+                                {% for comment in post.comments %}
+                                <div class="comment-container{% if comment.author == current_user %} current-user{% endif %}">
+                                    <div>
+                                        <a i="/posts/{{ post.user.username }}" class="comment-user">{{ comment.author_username.username }}</a>: 
+                                        <span class="comment-text{% if comment.author == current_user %} current-user{% endif %}">{{ comment.text }}</span>
+                                    </div>
+                                    {% if user.id == comment.author or user.id == post.author %}
+                                    <a href="{{ url_for('views.delete_comment', comment_id=comment.id) }}" class="delete-comment-button">Delete</a>
+                                    {% endif %}
+                                </div>                                    
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="input-group mb-3" method='POST' action="{{ url_for('views.create_comment', post_id=post.id) }}">
+                        <input type="text" name="text" class="form-control" placeholder="Comment something!" />
+                        <button type="submit" class="comment-button">Comment</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </section>
+
 <script>
     const url = "{{ url_for('views.create_post') }}";
     document.getElementById('post-form').addEventListener('submit', function(event) {

@@ -21,6 +21,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
+    
 }
 
 /* Ensure the font is applied to specific elements */
@@ -297,3 +298,19 @@ footer {
     color:#308bc7
 }
 
+/* Style for the toggle comments button */
+.toggle-comments-button {
+    font-family: 'BoogieBoys'; 
+    font-size: 23px;
+    background-color: #46bed5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.toggle-comments-button:hover {
+    background-color: #0491a7;
+}
