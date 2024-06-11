@@ -12,7 +12,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "itgurl"
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-    app.config['UPLOAD_FOLDER'] = 'website\\static\\uploads'
+    app.config['UPLOAD_FOLDER'] = '/home/farishahani/ColorMakeupAnalysis/static/uploads'
 
     db.init_app(app)
     
