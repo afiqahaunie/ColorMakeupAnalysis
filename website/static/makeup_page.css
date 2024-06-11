@@ -134,26 +134,6 @@ input{
         padding: 25px;
     }
 
-    .button-container {
-        display: flex;
-        align-items: center;
-        position: absolute;
-        left: 100px;
-    }
-
-    .custom-button,
-    .custom-button:visited {
-        border: 2px solid rgb(190, 57, 115);
-        padding: 5px 10px;
-        margin-right: 10px;
-        cursor: pointer;
-    }
-
-    .custom-button:hover {
-        background: #fccfdc;
-        color: #000;
-    }
-
     p{
         font-size: 17px;
         font-weight: 200;
