@@ -13,7 +13,7 @@
             <div class="post_container">
                 <div class="box-post">
                     <h1 align="center">Make a post</h1>
-                    <form method="POST" action="{{ url_for('views.create_post') }}" enctype="multipart/form-data">
+                    <form id="post-form" method="POST" action="{{ url_for('views.create_post') }}" enctype="multipart/form-data">
                         <textarea name="text" id="text" class="form-control"></textarea>
                         <br />
                         <input type="file" name="photo" accept="image/*">
