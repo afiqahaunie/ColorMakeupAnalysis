@@ -1,24 +1,19 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from os import path
 from flask_login import LoginManager
 
 db = SQLAlchemy()
-migrate = Migrate()
 DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "itgurl"
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-    app.config['UPLOAD_FOLDER'] = '/home/farishahani/ColorMakeupAnalysis/static/uploads'
+    app.config['UPLOAD_FOLDER'] = '/home/farishahani/ColorMakeupAnalysis/website/static/uploads'
 
     db.init_app(app)
     
-    migrate = Migrate(app, db)
-    migrate.init_app(app, db)
-
     from .views import views
     from .auth import auth
 
