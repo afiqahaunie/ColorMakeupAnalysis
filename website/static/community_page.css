@@ -8,8 +8,13 @@
     src: url("/static/fonts/BoogieBoys.ttf") format("opentype");
 }
 
-.container{
-    background: linear-gradient(rgb(238, 194, 194), rgb(177, 105, 233))
+.container {
+    background-color: #e5e5f7;
+    opacity: 0.8;
+    background-image:  linear-gradient(135deg, #ec93ca 25%, transparent 25%), linear-gradient(225deg, #ec93ca 25%, transparent 25%), linear-gradient(45deg, #ec93ca 25%, transparent 25%), linear-gradient(315deg, #ec93ca 25%, #e5e5f7 25%);
+    background-position:  10px 0, 10px 0, 0 0, 0 0;
+    background-size: 10px 10px;
+    background-repeat: repeat;
 }
 
 *,
