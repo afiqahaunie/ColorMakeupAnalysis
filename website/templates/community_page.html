@@ -21,7 +21,9 @@
                         <div align="center">
                             <button type="submit" class="post-button">Post</button>
                         </div>
-                        <p>Log in <a href="{{url_for('auth.signup')}}">here</a> to start posting now!</p>
+                        {% if not current_user.is_authenticated %}
+                            <h7>Login <a href="{{url_for('auth.login')}}">here</a> to start posting now!</h7>
+                        {% endif %}
                     </form>
                 </div>
             </div>

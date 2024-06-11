@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify, current_app, session
 from flask_login import login_required, current_user
-from .models import User,Post, Upload, Comment, Like, ColorAnalysis, Result
-from . import db
 from werkzeug.utils import secure_filename
-import os
 from functools import wraps
+from .models import Post, Upload, Comment, Like, ColorAnalysis, Result
+from . import db
+import os
 
 views = Blueprint("views", __name__)
 

@@ -1,9 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for, request, jsonify
-from . import db 
-from flask import session
-from .models import User, Result, Post, ColorAnalysis
+from flask import Blueprint, render_template, redirect, url_for, request, jsonify, session
 from flask_login import login_user, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from . import db 
+from .models import User, Result, Post, ColorAnalysis
 
 auth = Blueprint("auth", __name__)
 
