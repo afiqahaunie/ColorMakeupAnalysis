@@ -77,6 +77,15 @@ iframe{
     font-weight: 460;
 }
 
+.no-post {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
 .post-layout{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* To make the layout like a masonry layout */
@@ -130,13 +139,6 @@ iframe{
     margin-top: 30px;
 }
 
-.no-post{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center; /* Ensures text is centered within the flex item */
-}
-
 @media(max-width: 700px){
     .nav-links ul li{
         display: block;
@@ -154,14 +156,6 @@ iframe{
         transition: 0.5s;
     }
 
-    nav .fa{
-        display: block;
-        color: white;
-        margin: 10px;
-        font-size: 22px;
-        cursor: pointer;
-    }
-
     .nav-links ul{
         padding: 25px;
     }
@@ -170,8 +164,9 @@ iframe{
         flex-direction: column;
     }
 
-    p{
-        width: 80%;
+    .community-post p{
+        justify-content: center;
+        align-items: center;
     }
 
     .post-layout{
