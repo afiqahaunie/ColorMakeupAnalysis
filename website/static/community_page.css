@@ -43,19 +43,19 @@ body {
 /* Flex container for overall layout */
 .container-community {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping */
-    justify-content: center; /* Center items horizontally */
-    align-items: flex-start; /* Align items at the start vertically */
-    margin: 20px auto; /* Center the container with auto margin */
-    max-width: 1200px; /* Maximum width for large screens */
-    padding: 0 15px; /* Padding for smaller screens */
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: flex-start; 
+    margin: 20px auto; 
+    max-width: 1200px; 
+    padding: 0 15px; 
 }
 
 /* Sidebar styling */
 .sidebar {
-    width: 100%; /* Full width for smaller screens */
-    max-width: 200px; /* Maximum width for larger screens */
-    margin-bottom: 20px; /* Space below the sidebar */
+    width: 100%; 
+    max-width: 200px; 
+    margin-bottom: 20px; 
 }
 
 .sidebar nav ul {
@@ -111,21 +111,21 @@ body {
 /* Styles for larger screens */
 @media (min-width: 768px) {
     .container-community {
-        justify-content: space-between; /* Space items apart evenly */
+        justify-content: space-between; 
     }
 
     .sidebar {
-        width: 20%; /* Sidebar width as a percentage */
+        width: 20%;
     }
 
     .community-container, .post_container {
-        width: 75%; /* Width for both containers to align */
+        width: 75%; 
         max-width: 75%; /* Ensure max-width is consistent */
     }
 
-    /* Flex grow to ensure containers take available space proportionately */
+    
     .community-container, .post_container {
-        flex-grow: 1; /* Allow these containers to grow */
+        flex-grow: 1; 
     }
 }
 
@@ -199,23 +199,23 @@ button.btn {
 }
 
 .post-button {
-    font-family: 'BoogieBoys'; /* Ensures the font is 'BoogieBoys' */
-    font-size: 20px; /* Sets the font size */
-    border: 1px solid #007BFF; /* Adds a border with color */
-    border-radius: 4px; /* Rounds the corners of the button */
-    padding: 8px; /* Adds padding inside the button */
+    font-family: 'BoogieBoys'; 
+    font-size: 20px; 
+    border: 1px solid #007BFF; 
+    border-radius: 4px; 
+    padding: 8px; 
     padding-bottom: 0px;
-    display: inline-block; /* Displays the button as an inline block */
-    color: #007BFF; /* Sets the text color */
-    background-color: #f8f9fa; /* Sets the background color */
-    text-align: center; /* Centers the text inside the button */
-    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    display: inline-block; 
+    color: #007BFF; 
+    background-color: #f8f9fa; 
+    text-align: center; 
+    cursor: pointer; 
 }
 
 .post-button:hover {
-    background-color: #007BFF; /* Changes background color on hover */
-    color: white; /* Changes text color on hover */
-    border-color: #0056b3; /* Changes border color on hover */
+    background-color: #007BFF; 
+    color: white; 
+    border-color: #0056b3; 
 }
 
 footer {
@@ -240,66 +240,66 @@ footer {
 
 .btn-group .dropdown-item:hover {
     background-color: #007BFF; 
-    color: white; /* Change text color on hover */
-    border-color: #0056b3; /* Change border color on hover */
+    color: white; 
+    border-color: #0056b3; 
 }
 
 /* Styles for the comment button to match the Delete button */
 .comment-button {
-    font-family: 'BoogieBoys'; /* Ensures the font is 'BoogieBoys' */
-    font-size: 20px; /* Sets the font size */
-    border: 1px solid #007BFF; /* Adds a border with color */
-    border-radius: 4px; /* Rounds the corners of the button */
-    padding: 5px; /* Adds padding inside the button */
+    font-family: 'BoogieBoys'; 
+    font-size: 20px; 
+    border: 1px solid #007BFF; 
+    border-radius: 4px; 
+    padding: 5px; 
     padding-bottom: 0px;
-    display: inline-block; /* Displays the button as an inline block */
-    color: #007BFF; /* Sets the text color */
-    background-color: #f8f9fa; /* Sets the background color */
-    text-align: center; /* Centers the text inside the button */
-    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    display: inline-block; 
+    color: #007BFF; 
+    background-color: #f8f9fa; 
+    text-align: center; 
+    cursor: pointer; 
 }
 
-/* Hover effect for the comment button to match the Delete button */
+
 .comment-button:hover {
-    background-color: #007BFF; /* Changes background color on hover */
-    color: white; /* Changes text color on hover */
-    border-color: #0056b3; /* Changes border color on hover */
+    background-color: #007BFF; 
+    color: white; 
+    border-color: #0056b3; 
 }
 
 /* Container for each comment to align text and delete button */
 .comment-container {
-    display: flex; /* Use flexbox to align items */
-    justify-content: space-evenly; /* Align items to be spaced apart */
-    align-items: center; /* Vertically center items */
-    margin-bottom: 10px; /* Space between comments */
+    display: flex; 
+    justify-content: space-evenly; 
+    align-items: center; 
+    margin-bottom: 10px; 
 }
 
 /* Style for the delete comment button */
 .delete-comment-button {
-    font-size: 20px; /* Adjust font size as needed */
-    border: 1px solid #dc3545; /* Red border to indicate danger */
-    border-radius: 4px; /* Rounded corners */
-    padding: 5px; /* Padding inside the button */
+    font-size: 20px; 
+    border: 1px solid #dc3545; 
+    border-radius: 4px; 
+    padding: 5px; 
     padding-bottom: 0px;
-    color: #dc3545; /* Text color matching border */
-    background-color: #f8f9fa; /* Background color */
-    cursor: pointer; /* Pointer cursor to indicate it's clickable */
-    text-decoration: none; /* Remove underline if it's a link */
+    color: #dc3545; 
+    background-color: #f8f9fa; 
+    cursor: pointer; 
+    text-decoration: none; 
 }
 
-/* Hover effect for the delete comment button */
+
 .delete-comment-button:hover {
-    background-color: #dc3545; /* Red background on hover */
-    color: white; /* White text on hover */
-    border-color: #c82333; /* Darker red border on hover */
+    background-color: #dc3545; 
+    color: white;
+    border-color: #c82333; 
 }
 
-/* Style for the current user's comment */
+
 .comment-container.current-user {
     background-color: #f0f0f0; /* Background color for current user's comment */
 }
 
-/* Style for the comment text */
+
 .comment-text {
     color: #333333; /* Default color for comment text */
 }
@@ -327,7 +327,7 @@ footer {
 }
 
 .h7 {
-    font-size: 1.25rem; /* Adjust the size if needed */
-    font-weight: normal; /* Set the font weight if needed */
-    color: #333; /* Ensure a standard color */
+    font-size: 1.25rem; 
+    font-weight: normal; 
+    color: #333; 
 }
