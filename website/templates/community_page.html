@@ -53,7 +53,7 @@
                     </div>
                     <div class="card-text">{{ post.text }}</div>
                     {% if post.photo %}
-                    <img src="{{ url_for('static', filename='uploads/' + post.photo) }}" alt="Photo" width="350" height="300">
+                    <img src="{{ url_for('static', filename='uploads/' + post.photo) }}" alt="Photo">
                     {% endif %}
                     <br />
 
