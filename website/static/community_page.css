@@ -147,6 +147,20 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.card-border-dark img {
+    max-width: 400px; 
+    max-height: 450px; 
+    display: block;
+    margin: 0 auto; 
+}
+
+@media screen and (max-width: 400px) {
+    img {
+        max-width: 100%;
+        max-height: auto;
+    }
+}
+
 .card-header {
     background-color: #f8f9fa;
     padding: 0.75rem 1rem;
@@ -163,13 +177,6 @@ body {
 
 .card-text {
     margin: 1rem 0;
-}
-
-.card-text img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
 }
 
 .like-button {
