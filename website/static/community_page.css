@@ -130,10 +130,15 @@ body {
 }
 
 /* Full width for smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     .post_container, .community-container, .sidebar {
         width: 100%; /* Full width for smaller screens */
         max-width: none; /* Remove max width constraint */
+    }
+
+    .card-border-dark img {
+        max-width: 100%;
+        height: auto; 
     }
 }
 
@@ -152,13 +157,6 @@ body {
     max-height: 450px; 
     display: block;
     margin: 0 auto; 
-}
-
-@media screen and (max-width: 400px) {
-    img {
-        max-width: 100%;
-        max-height: auto;
-    }
 }
 
 .card-header {
