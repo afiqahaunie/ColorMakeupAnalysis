@@ -27,7 +27,7 @@ def makeup():
 
 @views.route("/community")
 def community():
-    posts = Post.query.order_by(Post.date.desc()),all()
+    posts = Post.query.order_by(Post.date.desc()).all()
     comments = Comment.query.order_by(Comment.date.desc()).all()
     if current_user.is_authenticated:
         # Fetch user's latest result from result table
