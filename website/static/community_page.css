@@ -273,9 +273,10 @@ footer {
 
 /* Container for each comment to align text and delete button */
 .comment-container {
+    position: relative;
     display: flex; 
-    justify-content: space-evenly; 
-    align-items: center; 
+    justify-content: space-between; 
+    align-items: flex-start; 
     margin-bottom: 10px; 
 }
 
@@ -289,7 +290,9 @@ footer {
     color: #dc3545; 
     background-color: #f8f9fa; 
     cursor: pointer; 
-    text-decoration: none; 
+    text-decoration: none;
+    flex-shrink: 0;
+    width: 50px;
 }
 
 
@@ -306,11 +309,20 @@ footer {
 
 
 .comment-text {
-    color: #333333; /* Default color for comment text */
+    text-align: left;
+    flex-grow: 1; 
+    flex-shrink: 1;
+    margin-right: 10px;
+    margin-left: 60px; 
+    word-break: break-word;
+    color: #333333; 
 }
 
 /* Style for the current user's username */
 .comment-user {
+    position: absolute;
+    left: 0;
+    top: 0;
     color:#308bc7
 }
 
@@ -335,4 +347,10 @@ footer {
     font-size: 1.25rem; 
     font-weight: normal; 
     color: #333; 
+}
+
+.post-date {
+    font-size: 15px;
+    text-align: left;
+    color: #888;
 }
