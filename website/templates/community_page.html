@@ -70,7 +70,7 @@
                                 {% for comment in comments %}
                                 <div class="comment-container{% if comment.author == current_user %} current-user{% endif %}">
                                     <div>
-                                        <a i="/posts/{{ post.user.username }}" class="comment-user">{{ comment.author_username.username }}</a>: 
+                                        <a i="/posts/{{ post.user.username }}" class="comment-user">{{ comment.author_username.username }}:</a> 
                                         <span class="comment-text{% if comment.author == current_user %} current-user{% endif %}">{{ comment.text }}</span>
                                     </div>
                                     {% if user.id == comment.author or user.id == post.author %}
