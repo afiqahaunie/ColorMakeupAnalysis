@@ -30,15 +30,20 @@ def community():
     posts = Post.query.all()
     
     if current_user.is_authenticated:
+        # Fetch user's latest result from result table
         latest_result = Result.query.filter_by(user_id=current_user.id).order_by(Result.id.desc()).first()
-        visual_type = latest_result.result_data if latest_result else None # Fetch user's latest result from result table
+        visual_type = latest_result.result_data if latest_result else None 
+        seasonal_palette = current_user.coloranalysis[-1].seasonal_palette if current_user.coloranalysis else None
         if visual_type:
             related_posts = Post.query.filter_by(visual_type=visual_type).all() # Relate the post with user's result of makeup test
+        elif seasonal_palette:
+            related_posts = Post.query.filter_by(seasonal_palette=seasonal_palette).all() # Relate the post with user's seasonal palette
         else:
             related_posts = []
 
     else:
         visual_type = None
+        seasonal_palette = None
         related_posts = []
 
     return render_template("community_page.html", user=current_user, posts=posts, related_posts=related_posts)
@@ -62,10 +67,20 @@ def create_post():
         if not text and (not photo or photo.filename == ''):
             return jsonify({'success': False, 'message': 'Post cannot be empty. Please provide text or photo.'})
         else:
-            visual_type = None
-            if current_user.result:
+            if current_user.result and current_user.coloranalysis:
+                latest_result = current_user.results[-1]
+                visual_type = latest_result.result_data
+                seasonal_palette = current_user.coloranalysis[-1].seasonal_palette
+            elif current_user.result:
                 latest_result = current_user.results[-1]
                 visual_type = latest_result.result_data if latest_result else None # Relate the post with user's result of makeup test
+                seasonal_palette = None
+            elif current_user.coloranalysis:
+                seasonal_palette = current_user.coloranalysis[-1].seasonal_palette if current_user.coloranalysis else None
+                visual_type = None
+            else:
+                seasonal_palette = None
+                visual_type = None
 
             filename = None
             if photo and allowed_file(photo.filename):
@@ -77,7 +92,7 @@ def create_post():
             
              # Only create the post if text is provided or photo is successfully uploaded
             if text or filename:
-                post = Post(text=text, author=current_user.id, photo=filename, visual_type=visual_type)
+                post = Post(text=text, author=current_user.id, photo=filename, visual_type=visual_type, seasonal_palette=seasonal_palette)
                 
                 db.session.add(post)
                 db.session.commit()
@@ -213,6 +228,7 @@ def results():
         session['coloranalysis'] = seasonal_palette
 
         previous_seasonal_palette = session.get('coloranalysis')
+        related_posts_color = []
 
         if current_user.is_authenticated:
                 new_analysis = ColorAnalysis(seasonal_palette=seasonal_palette, user=current_user)
@@ -222,8 +238,11 @@ def results():
                 if current_user.palette:
                     previous_seasonal_palette = current_user.palette[-1].seasonal_palette
 
+                if previous_seasonal_palette:
+                    related_posts_color = Post.query.filter_by(seasonal_palette=previous_seasonal_palette).all()
+
         # Redirect to results page with seasonal_palette as a query parameter
-        return redirect(url_for('views.show_results', user=current_user, seasonal_palette=seasonal_palette, previous_seasonal_palette=previous_seasonal_palette))
+        return redirect(url_for('views.show_results', user=current_user, seasonal_palette=seasonal_palette, previous_seasonal_palette=previous_seasonal_palette, related_posts_color=related_posts_color))
 
     return render_template('results.html')
 
@@ -231,8 +250,11 @@ def results():
 @login_required
 def previous_seasonal_palette():
     previous_seasonal_palette = current_user.coloranalysis[-1].seasonal_palette if current_user.coloranalysis else None  
+    related_posts_color = []
+    if previous_seasonal_palette:
+        related_posts_color = Post.query.filter_by(seasonal_palette=previous_seasonal_palette).all()
     
-    return render_template('results.html', seasonal_palette=previous_seasonal_palette, user=current_user)
+    return render_template('results.html', seasonal_palette=previous_seasonal_palette, user=current_user, related_posts_color=related_posts_color)
 
 def analyze_colors(hair_color, skin_color, eye_color):
     undertone = determine_undertone(skin_color)

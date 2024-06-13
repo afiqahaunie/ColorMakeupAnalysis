@@ -29,10 +29,39 @@
             <img src="static/images_coloranalysis/soft summer.png" alt="Soft Summer" height="600">
         {% endif %}
     </div>
-    <div class="recommendation">
-        {% if not current_user.is_authenticated %}
-            <h3>Save this result and join our community by <a href="/signup">signing up</a> right now!</h3>
+    <div class="community-post">
+        <h2>See post from other people who has the same seasonal palette as you below!</h2> 
+        {% if related_posts_color %} <!-- Display related post from community based on user's seasonal palette -->
+            <div class="post-layout">
+                {% for post in related_posts_color %}
+                    <a href="{{ url_for('views.community') }}">
+                        <div class="post-container">
+                            <div class="post-username">
+                                <h3>{{ post.user.username }}</h3>
+                                <hr class="solid">
+                            </div>
+                            <div class="post-text">
+                                <p>{{ post.text  }}</p>
+                                {% if post.photo %}
+                                <img src="{{ url_for('static', filename='uploads/' + post.photo) }}" alt="Post Image" class="post-photo">
+                                {% endif %}
+                            </div>
+                            <div class="post-date">
+                                <small>{{ post.date }}</small>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+
+        {% else %}
+            <p class="no-post">No post found for the selected visual type.</p>
         {% endif %}
-      </div>
+    </div>
+    {% if not current_user.is_authenticated %}
+    <div class="recommendation">
+        <h3>Save this result and join our community by <a href="/signup">signing up</a> right now!</h3>
+    </div>
+    {% endif %}
 </section>
 {% endblock %}

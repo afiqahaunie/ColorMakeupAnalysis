@@ -20,6 +20,7 @@ class Post(db.Model):
     comments = db.relationship('Comment', backref='post', passive_deletes=True)
     likes = db.relationship('Like', backref='post', passive_deletes=True)
     visual_type = db.Column(db.String(255), nullable=True)
+    seasonal_palette = db.Column(db.String(255), nullable=True)
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
