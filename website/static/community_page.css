@@ -90,6 +90,85 @@ h3{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.sidebar {
+    position: absolute;
+    top: 0;
+    left: -200px;
+    width: 200px;
+    height: 100vh;
+    background-color: white;
+    padding: 20px;
+    z-index: 2;
+    transition: 0.5s;
+}
+
+.material-symbols-outlined{
+    display: column;
+    margin: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#cancel-icon{
+    font-size: 25px;
+    color: rgb(217, 23, 107);
+}
+
+.sidebar-filters{
+    display: flex;
+    background-color: white;
+    color: rgb(217, 23, 107);
+    align-items: center;
+    border: 2px solid rgb(217, 23, 107);
+    padding: 0 3px;
+    border-radius: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.sidebar-filters i{
+    margin-right: 0;
+}
+
+.sidebar-filters p{
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(217, 23, 107);
+}
+
+.sidebar h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.sidebar h3 {
+    font-size: 1.2em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+    color: #007bff;
+}
+
+.sidebar ul li a.active {
+    font-weight: bold;
+    color: #007bff;
+}
 
 /* Styles for larger screens */
 @media (min-width: 768px) {
@@ -115,7 +194,7 @@ h3{
 
 /* Full width for smaller screens */
 @media (max-width: 700px) {
-    .post_container, .community-container, .sidebar {
+    .post_container, .community-container {
         width: 100%; /* Full width for smaller screens */
         max-width: none; /* Remove max width constraint */
     }
@@ -123,6 +202,28 @@ h3{
     .card-border-dark img {
         max-width: 100%;
         height: auto; 
+    }
+
+    .sidebar{
+        position: fixed;
+        height: 100vh;
+        width: 200px;
+        top: 0;
+        left: -200px;
+        z-index: 2;
+        overflow-y: auto;
+        transition: 0.5s;
+    }
+
+    .material-symbols-outlined{
+        display: column;
+        margin: 10px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .sidebar-filters{
+        margin-left: 5px;
     }
 }
 
@@ -363,49 +464,4 @@ footer {
     font-size: 15px;
     text-align: left;
     color: #888;
-}
-
-.sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 140px;
-    height: calc(100vh - var(--header-height));
-    background-color: white;
-    padding: 20px;
-    overflow-y: auto;
-}
-
-.sidebar h2 {
-    font-size: 1.5em;
-    margin-bottom: 15px;
-}
-
-.sidebar h3 {
-    font-size: 1.2em;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar ul li {
-    margin-bottom: 10px;
-}
-
-.sidebar ul li a {
-    color: #333;
-    text-decoration: none;
-}
-
-.sidebar ul li a:hover {
-    color: #007bff;
-}
-
-.sidebar ul li a.active {
-    font-weight: bold;
-    color: #007bff;
 }
