@@ -30,6 +30,17 @@ def community():
     posts = Post.query.order_by(Post.date.desc()).all()
     comments = Comment.query.order_by(Comment.date.desc()).all()
     if current_user.is_authenticated:
+        visual_type = request.args.get('visual_type')
+        seasonal_palette = request.args.get('seasonal_palette')
+
+        if visual_type:
+            posts = Post.query.filter_by(visual_type=visual_type).order_by(Post.date.desc()).all()
+        elif seasonal_palette:
+            posts = Post.query.filter_by(seasonal_palette=seasonal_palette).order_by(Post.date.desc()).all()
+        else:
+            posts = Post.query.order_by(Post.date.desc()).all()
+            comments = Comment.query.order_by(Comment.date.desc()).all()
+            
         # Fetch user's latest result from result table
         latest_result = Result.query.filter_by(user_id=current_user.id).order_by(Result.id.desc()).first()
         visual_type = latest_result.result_data if latest_result else None 

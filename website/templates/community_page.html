@@ -6,8 +6,23 @@
 
 <section class="Community-post">
     <div class="container-community">
-
-            
+        <div class="sidebar">
+            <h2>Filter</h2>
+            <h3>Visual Type</h3>
+            <ul>
+                <li><a href="{{ url_for('views.community', visual_type='low') }}">Low</a></li>
+                <li><a href="{{ url_for('views.community', visual_type='high') }}">High</a></li>
+                <li><a href="{{ url_for('views.community', visual_type='mixed') }}">Mixed</a></li>
+            </ul>
+            <h3>Seasonal Palette</h3>
+            <ul>
+                <li><a href="{{ url_for('views.community', seasonal_palette='Autumn') }}">Autumn</a></li>
+                <li><a href="{{ url_for('views.community', seasonal_palette='Light Spring') }}">Light Spring</a></li>
+                <li><a href="{{ url_for('views.community', seasonal_palette='Soft Autumn') }}">Soft Autumn</a></li>
+                <li><a href="{{ url_for('views.community', seasonal_palette='Soft Summer') }}">Soft Summer</a></li>
+                <li><a href="{{ url_for('views.community', seasonal_palette='Summer') }}">Summer</a></li>
+                <li><a href="{{ url_for('views.community', seasonal_palette='Winter') }}">Winter</a></li>
+            </ul>  
         </div>
         <div class="flex-container">
             <div class="post_container">
