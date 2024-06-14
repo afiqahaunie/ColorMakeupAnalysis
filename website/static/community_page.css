@@ -97,6 +97,11 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+h3{
+    font-size: 23px;
+    font-family: 'BoogieBoys';
+}
+
 /* Community container styles */
 .community-container {
     flex-grow: 1; /* Allow this container to grow */
@@ -153,8 +158,12 @@ body {
 }
 
 .card-border-dark img {
-    max-width: 400px; 
-    max-height: 450px; 
+    max-width: 90%;
+    height: auto;
+    margin: 5px;
+    border-radius: 4px;
+    object-fit: cover;
+    object-position: center;
     display: block;
     margin: 0 auto; 
 }
@@ -336,7 +345,7 @@ footer {
     border-radius: 4px;
     padding: 5px 10px;
     cursor: pointer;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
 .toggle-comments-button:hover {
