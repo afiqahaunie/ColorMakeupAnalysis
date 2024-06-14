@@ -364,3 +364,48 @@ footer {
     text-align: left;
     color: #888;
 }
+
+.sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 140px;
+    height: calc(100vh - var(--header-height));
+    background-color: white;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.sidebar h3 {
+    font-size: 1.2em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+    color: #007bff;
+}
+
+.sidebar ul li a.active {
+    font-weight: bold;
+    color: #007bff;
+}
