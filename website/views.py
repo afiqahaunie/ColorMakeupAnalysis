@@ -29,10 +29,12 @@ def makeup():
 def community():
     posts = Post.query.order_by(Post.date.desc()).all()
     comments = Comment.query.order_by(Comment.date.desc()).all()
+
     if current_user.is_authenticated:
         visual_type = request.args.get('visual_type')
         seasonal_palette = request.args.get('seasonal_palette')
 
+        # Fetching posts based on filters
         if visual_type:
             posts = Post.query.filter_by(visual_type=visual_type).order_by(Post.date.desc()).all()
         elif seasonal_palette:
@@ -77,27 +79,36 @@ def create_post():
 
         if not text and (not photo or photo.filename == ''):
             return jsonify({'success': False, 'message': 'Post cannot be empty. Please provide text or photo.'})
+        
         else:
+            # User has result of both tests
             if current_user.result and current_user.coloranalysis:
                 latest_result = current_user.results[-1]
                 visual_type = latest_result.result_data
                 seasonal_palette = current_user.coloranalysis[-1].seasonal_palette
+            
+            # User has makeup test result only
             elif current_user.result:
                 latest_result = current_user.results[-1]
                 visual_type = latest_result.result_data if latest_result else None # Relate the post with user's result of makeup test
                 seasonal_palette = None
+            
+            # User has color analysis result only
             elif current_user.coloranalysis:
-                seasonal_palette = current_user.coloranalysis[-1].seasonal_palette if current_user.coloranalysis else None
+                seasonal_palette = current_user.coloranalysis[-1].seasonal_palette if current_user.coloranalysis else None # Relate the post with user's result of color analysis test
                 visual_type = None
+
             else:
                 seasonal_palette = None
                 visual_type = None
 
             filename = None
+
             if photo and allowed_file(photo.filename):
                 # Save the uploaded photo
                 filename = secure_filename(photo.filename)
                 photo.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+
             elif photo and not allowed_file(photo.filename):
                 return jsonify({'success': False, 'message': 'Invalid file type'})
             
@@ -119,7 +130,7 @@ def delete_post(id):
     post = Post.query.get_or_404(id)
 
     if current_user != post.user:
-        pass  # Handle unauthorized access if needed
+        pass 
     else:
         db.session.delete(post)
         db.session.commit()
@@ -132,7 +143,7 @@ def create_comment(post_id):
     text = request.form.get('text')
 
     if not text:
-        pass  # Handle empty comment case (could log or take some other action)
+        pass  
     else:
         post = Post.query.filter_by(id=post_id).first()
         if post:
@@ -140,7 +151,7 @@ def create_comment(post_id):
             db.session.add(comment)
             db.session.commit()
         else:
-            pass  # Handle non-existent post case (could log or take some other action)
+            pass  
 
     return redirect(url_for('views.community'))
 
@@ -219,6 +230,7 @@ def display_image():
 @views.route("/results", methods=['GET', 'POST'])
 def results():
     if request.method == 'POST':
+        # Get form data
         hair_color = request.form.get('hair_color')
         skin_color = request.form.get('skin_color')
         eye_color = request.form.get('eye_color')
@@ -226,7 +238,6 @@ def results():
         # Process the form data
         seasonal_palette = analyze_colors(hair_color, skin_color, eye_color)
 
-        # Debug statement to print the seasonal_palette
         print("Seasonal Palette:", seasonal_palette)
 
         image = Upload.query.order_by(Upload.id.desc()).first()
@@ -246,13 +257,14 @@ def results():
                 db.session.add(new_analysis)
                 db.session.commit()
 
+                # Get the previous seasonal palette of the user
                 if current_user.palette:
                     previous_seasonal_palette = current_user.palette[-1].seasonal_palette
 
+                # Get related posts with the previous seasonal palette
                 if previous_seasonal_palette:
                     related_posts_color = Post.query.filter_by(seasonal_palette=previous_seasonal_palette).all()
 
-        # Redirect to results page with seasonal_palette as a query parameter
         return redirect(url_for('views.show_results', user=current_user, seasonal_palette=seasonal_palette, previous_seasonal_palette=previous_seasonal_palette, related_posts_color=related_posts_color))
 
     return render_template('results.html')
@@ -262,24 +274,26 @@ def results():
 def previous_seasonal_palette():
     previous_seasonal_palette = current_user.coloranalysis[-1].seasonal_palette if current_user.coloranalysis else None  
     related_posts_color = []
+
     if previous_seasonal_palette:
         related_posts_color = Post.query.filter_by(seasonal_palette=previous_seasonal_palette).all()
     
     return render_template('results.html', seasonal_palette=previous_seasonal_palette, user=current_user, related_posts_color=related_posts_color)
 
+# Function to analyze colors and determine seasonal palette
 def analyze_colors(hair_color, skin_color, eye_color):
     undertone = determine_undertone(skin_color)
     hair_type = analyze_hair_color(hair_color)
     eye_type = analyze_eye_color(eye_color)
     seasonal_palette = determine_seasonal_palette(undertone, hair_type, eye_type)
 
-    # Debug statements to print undertone, hair type, and eye type
     print("Undertone:", undertone)
     print("Hair Type:", hair_type)
     print("Eye Type:", eye_type)
 
     return seasonal_palette
 
+# Convert hex color to rgb
 def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
@@ -313,6 +327,7 @@ def analyze_eye_color(eye_color):
     else:
         return 'neutral'
 
+# Match undertone, hair_type and eye_type to get seasonal palette
 def determine_seasonal_palette(undertone, hair_type, eye_type):
     if undertone == 'cool' and hair_type == 'cool' and eye_type == 'cool':
         return 'Summer'
