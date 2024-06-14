@@ -23,7 +23,6 @@
     box-sizing: border-box;
 }
 
-/* Apply the font to the entire body */
 body {
     font-family: 'BoogieBoys';
     font-size: 30px;
@@ -33,9 +32,8 @@ body {
     
 }
 
-/* Ensure the font is applied to specific elements */
 .box-post h1, .community-container h1 {
-    font-family: 'Kaoly'; /* Use 'Kaoly' font for headings */
+    font-family: 'Kaoly'; 
     margin-top: 0;
     color: rgb(217, 23, 107);
 }
@@ -51,24 +49,23 @@ body {
     padding: 0 15px; 
 }
 
-
-
-/* Flex container for post elements */
 .flex-container {
     display: flex;
     flex-wrap: wrap; /* Allow wrapping */
     gap: 20px; /* Gap between items */
-    justify-content: center; /* Center items */
+    justify-content: center; 
     width: 100%;
 }
 
-
-/* Post container styles */
 .post_container {
-    width: 100%; /* Full width for smaller screens */
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
     background-color: #ffffff;
-    max-width: 400px; /* Maximum width for larger screens */
-    margin: 10px; /* Adjust margin */
+    max-width: 400px; 
+    margin: 10px; 
+    justify-content: center;
+    align-items: center;
     border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -79,12 +76,15 @@ h3{
     font-family: 'BoogieBoys';
 }
 
-/* Community container styles */
 .community-container {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1; /* Allow this container to grow */
     background-color: #fff;
-    margin: 20px auto; /* Center with auto margin */
+    margin: 20px auto; 
     padding: 15px;
+    justify-content: center;
+    align-items: center;
     border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -191,11 +191,9 @@ h3{
     }
 }
 
-
-/* Full width for smaller screens */
 @media (max-width: 700px) {
     .post_container, .community-container {
-        width: 100%; /* Full width for smaller screens */
+        width: 100%; 
         max-width: none; /* Remove max width constraint */
     }
 
@@ -227,8 +225,6 @@ h3{
     }
 }
 
-
-/* Additional styling for specific elements */
 .card-border-dark {
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -237,7 +233,6 @@ h3{
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 
 .card-border-dark img {
     max-width: 90%;
@@ -250,7 +245,6 @@ h3{
     margin: 0 auto; 
 }
 
-
 .card-header {
     background-color: #f8f9fa;
     padding: 0.75rem 1rem;
@@ -260,17 +254,14 @@ h3{
     align-items: center;
 }
 
-
 .card-header a {
     text-decoration: none;
     color: #7f1cf8;
 }
 
-
 .card-text {
     margin: 1rem 0;
 }
-
 
 .like-button {
     background: none;
@@ -279,11 +270,9 @@ h3{
     cursor: pointer;
 }
 
-
 .like-button i {
     font-size: 1.2rem;
 }
-
 
 input.form-control, textarea.form-control {
     width: 80%;
@@ -293,14 +282,12 @@ input.form-control, textarea.form-control {
     border-radius: 4px;
 }
 
-
 button.btn {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
-
 
 .post-button {
     font-family: 'BoogieBoys'; 
@@ -316,13 +303,11 @@ button.btn {
     cursor: pointer; 
 }
 
-
 .post-button:hover {
     background-color: #007BFF; 
     color: white; 
     border-color: #0056b3; 
 }
-
 
 footer {
     background-color: #333;
@@ -334,7 +319,6 @@ footer {
     bottom: 0;
 }
 
-
 .btn-group .dropdown-item {
     font-size: 20px;
     border: 1px solid #007BFF; 
@@ -345,15 +329,12 @@ footer {
     background-color: #f8f9fa; 
 }
 
-
 .btn-group .dropdown-item:hover {
     background-color: #007BFF; 
     color: white; 
     border-color: #0056b3; 
 }
 
-
-/* Styles for the comment button to match the Delete button */
 .comment-button {
     font-family: 'BoogieBoys'; 
     font-size: 20px; 
@@ -368,15 +349,12 @@ footer {
     cursor: pointer; 
 }
 
-
 .comment-button:hover {
     background-color: #007BFF; 
     color: white; 
     border-color: #0056b3; 
 }
 
-
-/* Container for each comment to align text and delete button */
 .comment-container {
     position: relative;
     display: flex; 
@@ -385,8 +363,6 @@ footer {
     margin-bottom: 10px; 
 }
 
-
-/* Style for the delete comment button */
 .delete-comment-button {
     font-size: 20px; 
     border: 1px solid #dc3545; 
@@ -401,19 +377,15 @@ footer {
     width: 50px;
 }
 
-
 .delete-comment-button:hover {
     background-color: #dc3545; 
     color: white;
     border-color: #c82333; 
 }
 
-
-
 .comment-container.current-user {
-    background-color: #f0f0f0; /* Background color for current user's comment */
+    background-color: #f0f0f0; 
 }
-
 
 .comment-text {
     text-align: left;
@@ -425,8 +397,6 @@ footer {
     color: #333333; 
 }
 
-
-/* Style for the current user's username */
 .comment-user {
     position: absolute;
     left: 0;
@@ -434,8 +404,6 @@ footer {
     color:#308bc7
 }
 
-
-/* Style for the toggle comments button */
 .toggle-comments-button {
     font-family: 'BoogieBoys'; 
     font-size: 23px;
@@ -448,11 +416,9 @@ footer {
     margin: 10px 0;
 }
 
-
 .toggle-comments-button:hover {
     background-color: #0491a7;
 }
-
 
 .h7 {
     font-size: 1.25rem; 
