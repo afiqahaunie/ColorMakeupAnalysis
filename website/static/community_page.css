@@ -51,31 +51,7 @@ body {
     padding: 0 15px; 
 }
 
-/* Sidebar styling */
-.sidebar {
-    width: 100%; 
-    max-width: 200px; 
-    margin-bottom: 20px; 
-}
 
-.sidebar nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sidebar nav ul li {
-    margin-bottom: 1rem;
-}
-
-.sidebar nav ul li a {
-    text-decoration: none;
-    color: #333333;
-    font-weight: bold;
-}
-
-.sidebar nav ul li a:hover {
-    color: #007BFF;
-}
 
 /* Flex container for post elements */
 .flex-container {
@@ -85,6 +61,7 @@ body {
     justify-content: center; /* Center items */
     width: 100%;
 }
+
 
 /* Post container styles */
 .post_container {
@@ -113,6 +90,7 @@ h3{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+
 /* Styles for larger screens */
 @media (min-width: 768px) {
     .container-community {
@@ -134,6 +112,7 @@ h3{
     }
 }
 
+
 /* Full width for smaller screens */
 @media (max-width: 700px) {
     .post_container, .community-container, .sidebar {
@@ -147,6 +126,7 @@ h3{
     }
 }
 
+
 /* Additional styling for specific elements */
 .card-border-dark {
     border: 1px solid #ddd;
@@ -156,6 +136,7 @@ h3{
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 
 .card-border-dark img {
     max-width: 90%;
@@ -168,6 +149,7 @@ h3{
     margin: 0 auto; 
 }
 
+
 .card-header {
     background-color: #f8f9fa;
     padding: 0.75rem 1rem;
@@ -177,14 +159,17 @@ h3{
     align-items: center;
 }
 
+
 .card-header a {
     text-decoration: none;
     color: #7f1cf8;
 }
 
+
 .card-text {
     margin: 1rem 0;
 }
+
 
 .like-button {
     background: none;
@@ -193,9 +178,11 @@ h3{
     cursor: pointer;
 }
 
+
 .like-button i {
     font-size: 1.2rem;
 }
+
 
 input.form-control, textarea.form-control {
     width: 80%;
@@ -205,12 +192,14 @@ input.form-control, textarea.form-control {
     border-radius: 4px;
 }
 
+
 button.btn {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
+
 
 .post-button {
     font-family: 'BoogieBoys'; 
@@ -226,11 +215,13 @@ button.btn {
     cursor: pointer; 
 }
 
+
 .post-button:hover {
     background-color: #007BFF; 
     color: white; 
     border-color: #0056b3; 
 }
+
 
 footer {
     background-color: #333;
@@ -242,6 +233,7 @@ footer {
     bottom: 0;
 }
 
+
 .btn-group .dropdown-item {
     font-size: 20px;
     border: 1px solid #007BFF; 
@@ -252,11 +244,13 @@ footer {
     background-color: #f8f9fa; 
 }
 
+
 .btn-group .dropdown-item:hover {
     background-color: #007BFF; 
     color: white; 
     border-color: #0056b3; 
 }
+
 
 /* Styles for the comment button to match the Delete button */
 .comment-button {
@@ -280,6 +274,7 @@ footer {
     border-color: #0056b3; 
 }
 
+
 /* Container for each comment to align text and delete button */
 .comment-container {
     position: relative;
@@ -288,6 +283,7 @@ footer {
     align-items: flex-start; 
     margin-bottom: 10px; 
 }
+
 
 /* Style for the delete comment button */
 .delete-comment-button {
@@ -312,6 +308,7 @@ footer {
 }
 
 
+
 .comment-container.current-user {
     background-color: #f0f0f0; /* Background color for current user's comment */
 }
@@ -327,6 +324,7 @@ footer {
     color: #333333; 
 }
 
+
 /* Style for the current user's username */
 .comment-user {
     position: absolute;
@@ -334,6 +332,7 @@ footer {
     top: 0;
     color:#308bc7
 }
+
 
 /* Style for the toggle comments button */
 .toggle-comments-button {
@@ -348,9 +347,11 @@ footer {
     margin: 10px 0;
 }
 
+
 .toggle-comments-button:hover {
     background-color: #0491a7;
 }
+
 
 .h7 {
     font-size: 1.25rem; 
