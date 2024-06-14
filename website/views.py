@@ -27,8 +27,8 @@ def makeup():
 
 @views.route("/community")
 def community():
-    posts = Post.query.all()
-    
+    posts = Post.query.order_by(Post.date.desc()).all()
+    comments = Comment.query.order_by(Comment.date.desc()).all()
     if current_user.is_authenticated:
         # Fetch user's latest result from result table
         latest_result = Result.query.filter_by(user_id=current_user.id).order_by(Result.id.desc()).first()
@@ -46,7 +46,7 @@ def community():
         seasonal_palette = None
         related_posts = []
 
-    return render_template("community_page.html", user=current_user, posts=posts, related_posts=related_posts)
+    return render_template("community_page.html", user=current_user, posts=posts, related_posts=related_posts, comments=comments)
 
 
 @views.route('/login')

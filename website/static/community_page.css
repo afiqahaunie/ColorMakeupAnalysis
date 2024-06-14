@@ -74,6 +74,10 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+h3{
+    font-size: 23px;
+    font-family: 'BoogieBoys';
+}
 
 /* Community container styles */
 .community-container {
@@ -135,8 +139,12 @@ body {
 
 
 .card-border-dark img {
-    max-width: 400px; 
-    max-height: 450px; 
+    max-width: 90%;
+    height: auto;
+    margin: 5px;
+    border-radius: 4px;
+    object-fit: cover;
+    object-position: center;
     display: block;
     margin: 0 auto; 
 }
@@ -269,9 +277,10 @@ footer {
 
 /* Container for each comment to align text and delete button */
 .comment-container {
+    position: relative;
     display: flex; 
-    justify-content: space-evenly; 
-    align-items: center; 
+    justify-content: space-between; 
+    align-items: flex-start; 
     margin-bottom: 10px; 
 }
 
@@ -286,7 +295,9 @@ footer {
     color: #dc3545; 
     background-color: #f8f9fa; 
     cursor: pointer; 
-    text-decoration: none; 
+    text-decoration: none;
+    flex-shrink: 0;
+    width: 50px;
 }
 
 
@@ -304,12 +315,21 @@ footer {
 
 
 .comment-text {
-    color: #333333; /* Default color for comment text */
+    text-align: left;
+    flex-grow: 1; 
+    flex-shrink: 1;
+    margin-right: 10px;
+    margin-left: 60px; 
+    word-break: break-word;
+    color: #333333; 
 }
 
 
 /* Style for the current user's username */
 .comment-user {
+    position: absolute;
+    left: 0;
+    top: 0;
     color:#308bc7
 }
 
@@ -324,7 +344,7 @@ footer {
     border-radius: 4px;
     padding: 5px 10px;
     cursor: pointer;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
 
@@ -337,4 +357,10 @@ footer {
     font-size: 1.25rem; 
     font-weight: normal; 
     color: #333; 
+}
+
+.post-date {
+    font-size: 15px;
+    text-align: left;
+    color: #888;
 }
