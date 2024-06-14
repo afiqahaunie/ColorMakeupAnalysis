@@ -145,7 +145,7 @@ iframe{
     }
 
     .nav-links{
-        position: absolute;
+        position: fixed;
         background: rgb(217, 23, 107);
         height: 100vh;
         width: 200px;
