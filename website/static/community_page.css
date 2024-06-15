@@ -46,7 +46,9 @@ body {
     align-items: flex-start; 
     margin: 20px auto; 
     max-width: 1200px; 
-    padding: 0 15px; 
+    padding: 0 15px;
+    width: calc(100% - 100px);
+    margin: 0 auto;
 }
 
 .flex-container {
@@ -79,12 +81,10 @@ h3{
 .community-container {
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Allow this container to grow */
+    flex-grow: 1;
     background-color: #fff;
     margin: 20px auto; 
     padding: 15px;
-    justify-content: center;
-    align-items: center;
     border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
