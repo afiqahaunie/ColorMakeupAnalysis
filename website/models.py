@@ -49,7 +49,8 @@ class Result(db.Model):
     user = db.relationship('User', backref='results')
 
 class ColorAnalysis(db.Model):
+    __tablename__ = 'color_analysis'
     id = db.Column(db.Integer, primary_key=True)
     seasonal_palette = db.Column(db.String(255))
     user_id = db.Column(db.Integer, db. ForeignKey('user.id'))
-    user = db.relationship('User', backref='palette')
+    user = db.relationship('User', back_populates='coloranalysis', overlaps='coloranalysis,user_pallete')
