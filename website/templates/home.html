@@ -9,7 +9,7 @@
                <h3>Unlock Your True Colors!</h3>
                <p>At our service, we dive deep into the different of tones and shades to unveil your personal palette. This is your chance to start styling outfits with the true colour palette. Dont miss out the chance!</p>
                 {% if current_user.is_authenticated and current_user.coloranalysis %}
-                    <p>See your previous seasonal palette <a href="{{url_for('views.previous_seasonal_palette')}}">here.</a></p> <!-- Direct to result page -->
+                    <p><b>See your previous seasonal palette and related posts <a href="{{url_for('views.previous_seasonal_palette')}}">here.</a></b></p> <!-- Direct to result page -->
                 {% endif %}
                <a href="color" class="try-button">Try now!</a> <!-- Direct to color test page -->
            </div>
@@ -19,7 +19,7 @@
                <p>Makeup is never a stressful thing to do. However, did you know that the way your makeup looks can be influenced by the shape and features of your face? 
                 But do not worry, as we can take care of all your concerns with just our test. Take this test, and we will tell you right away your type of makeup archetype and makeup tutorials, so you will be able to see your absolute best!</p>
                 {% if current_user.is_authenticated and current_user.result %}
-                    <p>See your previous result <a href="{{url_for('auth.previous_result')}}">here.</a></p> <!-- Direct to makeup test page -->
+                    <p><b>See your previous result <a href="{{url_for('auth.previous_result')}}">here.</a></b></p> <!-- Direct to makeup test page -->
                 {% endif %}
                <a href="makeup" class="try-button">Try now!</a>
            </div>
