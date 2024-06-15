@@ -25,10 +25,12 @@
                 <li><a href="{{ url_for('views.community', seasonal_palette='Winter') }}">Winter</a></li>
             </ul>  
         </div>
+        {% if current_user.is_authenticated %}
         <div class="sidebar-filters" onclick="toggleSidebar()">
             <i class="material-symbols-outlined" id="filters-icon">Tune</i>
             <p>Filters</p>
         </div>
+        {% endif %}
         <div class="flex-container">
             <div class="post_container">
                 <div class="box-post">
