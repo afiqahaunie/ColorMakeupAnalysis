@@ -358,7 +358,8 @@ footer {
     display: flex; 
     justify-content: space-between; 
     align-items: flex-start; 
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
+    padding-left: 100px;
 }
 
 .delete-comment-button {
@@ -390,7 +391,6 @@ footer {
     flex-grow: 1; 
     flex-shrink: 1;
     margin-right: 10px;
-    margin-left: 60px; 
     word-break: break-word;
     color: #333333; 
 }
@@ -399,7 +399,13 @@ footer {
     position: absolute;
     left: 0;
     top: 0;
-    color:#308bc7
+    color:#308bc7;
+    width: 100px; 
+    text-align: left; 
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 10px;
 }
 
 .toggle-comments-button {
