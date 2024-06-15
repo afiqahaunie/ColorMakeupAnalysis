@@ -98,7 +98,8 @@ def test_result():
             visual_type = "mixed"
 
         # Save user's result in session if they are not signed up yet
-        session['result'] = visual_type
+        if not current_user.is_authenticated:
+            session['result'] = visual_type
 
         previous_result = session.get('result')
         related_posts = []
