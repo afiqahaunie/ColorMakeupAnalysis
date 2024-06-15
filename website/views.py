@@ -247,7 +247,8 @@ def results():
         db.session.commit()
 
         # Save user's result in session if they are not signed up yet
-        session['coloranalysis'] = seasonal_palette
+        if not current_user.is_authenticated:
+            session['coloranalysis'] = seasonal_palette
 
         previous_seasonal_palette = session.get('coloranalysis')
         related_posts_color = []
