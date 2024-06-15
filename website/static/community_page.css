@@ -56,6 +56,7 @@ body {
     flex-wrap: wrap; /* Allow wrapping */
     gap: 20px; /* Gap between items */
     justify-content: center; 
+    align-items: center;
     width: 100%;
 }
 
@@ -65,7 +66,7 @@ body {
     width: 100%; 
     background-color: #ffffff;
     max-width: 400px; 
-    margin: 10px; 
+    margin: 20px auto; 
     justify-content: center;
     align-items: center;
     border: 1px solid #ddd;
@@ -176,10 +177,6 @@ h3{
         justify-content: space-between; 
     }
 
-    .sidebar {
-        width: 20%;
-    }
-
     .community-container, .post_container {
         width: 75%; 
         max-width: 75%; /* Ensure max-width is consistent */
@@ -203,7 +200,7 @@ h3{
     }
 
     .sidebar{
-        position: fixed;
+        position: absolute;
         height: 100vh;
         width: 200px;
         top: 0;
