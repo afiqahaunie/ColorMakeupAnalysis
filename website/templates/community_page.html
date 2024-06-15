@@ -90,7 +90,7 @@
                     <div class="collapse comments-section" id="comments-{{ post.id }}" style="display: none;">
                         <div class="card">
                             <div class="card-body" id="comments-expanded-{{ post.id }}">
-                                {% for comment in comments %}
+                                {% for comment in post.comments %}
                                 <div class="comment-container{% if comment.author == current_user %} current-user{% endif %}">
                                     <div>
                                         <p class="comment-user">{{ comment.author_username.username }}:</p> 
